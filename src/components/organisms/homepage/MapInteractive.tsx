@@ -23,6 +23,8 @@ const MapInteractive = ({ provinces, svgWidth, svgHeight }: MapInteractiveProps)
     [provinces]
   )
   const hoveredProvince = hoveredProvinceId ? (provinceById[hoveredProvinceId] ?? null) : null
+  const tooltipHalfWidthPx = 96
+  const tooltipHorizontalGapPx = 10
 
   return (
     <div className="w-full max-w-[1440px] px-3 py-16 md:px-6">
@@ -55,9 +57,11 @@ const MapInteractive = ({ provinces, svgWidth, svgHeight }: MapInteractiveProps)
           </svg>
           {hoveredProvince ? (
             <div
-              className="pointer-events-none absolute z-10 -translate-x-1/2 translate-y-[-130%]"
+              className={`pointer-events-none absolute z-10 -translate-x-1/2 ${
+                hoveredProvince.centerY < svgHeight * 0.28 ? 'translate-y-3' : 'translate-y-[-130%]'
+              }`}
               style={{
-                left: `${(hoveredProvince.centerX / svgWidth) * 100}%`,
+                left: `clamp(${tooltipHalfWidthPx + tooltipHorizontalGapPx}px, ${(hoveredProvince.centerX / svgWidth) * 100}%, calc(100% - ${tooltipHalfWidthPx + tooltipHorizontalGapPx}px))`,
                 top: `${(hoveredProvince.centerY / svgHeight) * 100}%`
               }}
             >
@@ -70,7 +74,11 @@ const MapInteractive = ({ provinces, svgWidth, svgHeight }: MapInteractiveProps)
                   <People />
                 </div>
                 <span className="sr-only">Total mahasiswa {hoveredProvince.totalMahasiswa}</span>
-                <div className="absolute bottom-[-12px] left-1/2 h-0 w-0 -translate-x-1/2 border-t-[14px] border-r-[12px] border-l-[12px] border-t-white border-r-transparent border-l-transparent" />
+                {hoveredProvince.centerY < svgHeight * 0.28 ? (
+                  <div className="absolute top-[-12px] left-1/2 h-0 w-0 -translate-x-1/2 border-r-[12px] border-b-[14px] border-l-[12px] border-r-transparent border-b-white border-l-transparent" />
+                ) : (
+                  <div className="absolute bottom-[-12px] left-1/2 h-0 w-0 -translate-x-1/2 border-t-[14px] border-r-[12px] border-l-[12px] border-t-white border-r-transparent border-l-transparent" />
+                )}
               </div>
             </div>
           ) : null}
