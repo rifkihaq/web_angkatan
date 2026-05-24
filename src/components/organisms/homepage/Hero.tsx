@@ -21,7 +21,7 @@ const Hero = () => {
   return (
     <section
       id="hero"
-      className="bg-blue-cs-40 text-neutral-cs-10 relative flex w-full items-center justify-center overflow-hidden"
+      className="bg-blue-cs-40 text-neutral-cs-10 relative flex w-full items-center justify-center overflow-hidden py-36 md:py-16"
     >
       {/* 1. LAYER VIDEO: Tanpa z-index (Otomatis paling bawah) */}
       <video
