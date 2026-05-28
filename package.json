@@ -6,7 +6,8 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "eslint"
+    "lint": "eslint",
+    "generate:map-data": "node scripts/generate-map-data.mjs"
   },
   "dependencies": {
     "next": "16.2.6",

@@ -5,36 +5,43 @@ import LogoIcon from '@/components/atoms/icon/LogoIcon'
 import Star from '@/components/atoms/icon/Star'
 
 import FooterImage from '@/assets/images/layout/footer.webp'
+import { getTextStrokeStyle } from '@/lib/textStroke'
 
 const Footer = () => {
   return (
-    <div className="bg-blue-cs-40 relative flex h-65.75 w-full items-center justify-between overflow-hidden p-20 text-white">
+    <footer className="bg-blue-cs-40 relative w-full overflow-hidden text-white">
       <Image
         src={FooterImage}
         alt="Footer"
-        className="absolute inset-0 w-full object-cover opacity-10"
+        className="pointer-events-none absolute inset-0 h-full w-full object-cover opacity-10"
         height={200}
         width={400}
       />
-      <LogoIcon width={100} height={100} />
-      <div className="relative flex flex-col items-end gap-4">
-        <h2 className="font-rubikone text-blue-cs-30 text-4xl [-webkit-text-stroke:2px_#fffddd]">
-          A Space to Grow Together
-          <Star className="absolute top-0 -right-3" width={20} height={20} />
-        </h2>
-        <p className="flex items-center gap-2 font-semibold">
-          <a
-            href="https://www.instagram.com/it2025_its/"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="transition-transform hover:scale-110"
+      <div className="relative mx-auto flex w-full max-w-[1440px] flex-col items-center gap-6 px-5 py-10 text-center sm:px-8 sm:py-12 md:gap-8 lg:flex-row lg:items-center lg:justify-between lg:px-16 lg:py-14 lg:text-left">
+        <LogoIcon width={72} height={78} className="h-auto w-[72px] sm:w-[84px] lg:w-[100px]" />
+        <div className="relative flex flex-col items-center gap-4 lg:items-end">
+          <h2
+            className="font-rubikone text-blue-cs-30 relative text-2xl sm:text-3xl lg:text-4xl"
+            style={getTextStrokeStyle({ color: '#fffddd', width: 2 })}
           >
-            <Ig width={28} />
-          </a>
-          <span>© ITS Information Technology — est. 2025</span>
-        </p>
+            A Space to Grow Together
+            <Star className="absolute -top-1 -right-3 sm:-top-2 sm:-right-4" width={20} height={20} />
+          </h2>
+          <p className="flex flex-wrap items-center justify-center gap-2 text-sm font-semibold sm:text-base lg:justify-end">
+            <a
+              href="https://www.instagram.com/it2025_its/"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="transition-transform hover:scale-110"
+              aria-label="Instagram IT 2025 ITS"
+            >
+              <Ig width={26} />
+            </a>
+            <span>© ITS Information Technology - est. 2025</span>
+          </p>
+        </div>
       </div>
-    </div>
+    </footer>
   )
 }
 
