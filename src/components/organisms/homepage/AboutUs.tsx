@@ -13,7 +13,7 @@ const AboutUs = () => {
             src={cloudIcon}
             alt=""
             aria-hidden="true"
-            className="pointer-events-none absolute top-[42px] right-[calc(50%+28px)] z-0 h-auto w-[38vw] min-w-[112px] max-w-[172px] scale-x-[-1] -rotate-12 sm:hidden"
+            className="pointer-events-none absolute top-[42px] right-[calc(50%+28px)] z-0 h-auto w-[38vw] max-w-[172px] min-w-[112px] scale-x-[-1] -rotate-12 sm:hidden"
           />
           <h2
             className="font-rubikone text-blue-cs-30 relative z-10 text-[32px] leading-[40px] sm:text-[40px] sm:leading-[52px] lg:text-[56px] lg:leading-[70px]"
@@ -25,11 +25,11 @@ const AboutUs = () => {
             src={cloudIcon}
             alt=""
             aria-hidden="true"
-            className="pointer-events-none absolute top-[42px] left-[calc(50%+28px)] z-0 h-auto w-[38vw] min-w-[112px] max-w-[172px] rotate-12 sm:hidden"
+            className="pointer-events-none absolute top-[42px] left-[calc(50%+28px)] z-0 h-auto w-[38vw] max-w-[172px] min-w-[112px] rotate-12 sm:hidden"
           />
         </div>
 
-        <div className="relative w-full max-w-[1040px] overflow-hidden">
+        <div className="relative w-full max-w-[1040px] overflow-visible">
           <Image
             src={cloudIcon}
             alt=""
