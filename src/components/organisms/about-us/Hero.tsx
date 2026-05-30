@@ -12,7 +12,7 @@ const Hero = () => {
       className="text-neutral-cs-10 relative flex min-h-[50vh] w-full flex-col items-center justify-end text-center lg:px-[90px]"
     >
       {/* {TITLE} */}
-      <div className="relative inline-block w-full max-w-[325px] sm:max-w-[500px] lg:max-w-[760px]">
+      <div className="relative inline-block w-full max-w-[325px] sm:max-w-[500px] lg:max-w-[890px]">
         <Image
           src={TitleImage}
           alt="Beyond the Identity"
@@ -24,7 +24,7 @@ const Hero = () => {
         />
 
         {/* {TULISAN TITLE} */}
-        <p className="leading- mx-auto mt-3 w-full max-w-[800px] text-center font-sans text-[12px] leading-relaxed font-semibold text-white sm:text-base md:text-lg">
+        <p className="mx-auto mt-3 w-full max-w-[800px] text-center font-sans text-[12px] leading-0 leading-relaxed font-semibold text-white sm:text-base md:text-lg">
           More than just a name. This is the story, vision, and philosophy that shape our identity.
         </p>
       </div>
