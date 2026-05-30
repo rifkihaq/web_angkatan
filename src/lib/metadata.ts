@@ -2,7 +2,7 @@ import { Metadata } from 'next'
 
 const DEFAULT_BASE_URL = 'https://evastra25.vercel.app'
 
-const getMetadataBase = () => {
+export const getMetadataBase = () => {
   try {
     return new URL(process.env.BASE_URL || DEFAULT_BASE_URL)
   } catch {

@@ -7,7 +7,12 @@ import type { StaticImageData } from 'next/image'
 
 import { getTextStrokeStyle } from '@/lib/textStroke'
 
-import supporterPlaceholder from '@/assets/images/homepage/moments/supporter-placeholder.webp'
+import Ara7 from '@/assets/images/homepage/moments/ara7.jpg'
+import Bukber from '@/assets/images/homepage/moments/bukber.jpeg'
+import ItFest from '@/assets/images/homepage/moments/itfest.jpg'
+import Makrab from '@/assets/images/homepage/moments/makrab.jpg'
+import Okkbk from '@/assets/images/homepage/moments/okkbk.jpg'
+import PraOkkbk from '@/assets/images/homepage/moments/pra-okkbk.jpg'
 
 type MomentPhoto = {
   id: number
@@ -19,37 +24,37 @@ type MomentPhoto = {
 const momentPhotos: MomentPhoto[] = [
   {
     id: 1,
-    src: supporterPlaceholder,
+    src: Makrab,
     alt: 'Supporter top center',
     desktopClassName: 'top-[180px] left-1/2 z-20 w-[520px] -translate-x-1/2 rotate-[-1deg] shadow-2xl'
   },
   {
     id: 2,
-    src: supporterPlaceholder,
+    src: Bukber,
     alt: 'Supporter top left',
     desktopClassName: 'top-[120px] left-[40px] z-10 w-[520px] rotate-[-16deg] shadow-xl'
   },
   {
     id: 3,
-    src: supporterPlaceholder,
+    src: Ara7,
     alt: 'Supporter top right',
     desktopClassName: 'top-[100px] right-[40px] z-[15] w-[520px] rotate-[8deg] shadow-xl'
   },
   {
     id: 4,
-    src: supporterPlaceholder,
+    src: Okkbk,
     alt: 'Supporter bottom left',
     desktopClassName: 'bottom-[240px] left-[20px] z-[9] w-[520px] rotate-[-4deg] shadow-xl'
   },
   {
     id: 5,
-    src: supporterPlaceholder,
+    src: ItFest,
     alt: 'Supporter bottom center',
     desktopClassName: 'bottom-[160px] left-1/2 z-[12] w-[520px] -translate-x-1/2 rotate-[15deg] shadow-2xl'
   },
   {
     id: 6,
-    src: supporterPlaceholder,
+    src: PraOkkbk,
     alt: 'Supporter bottom right',
     desktopClassName: 'right-[40px] bottom-[250px] z-10 w-[520px] rotate-[-12deg] shadow-xl'
   }
@@ -79,7 +84,7 @@ const Moments = () => {
 
   return (
     <section className="bg-blue-cs-40 min-h-screen w-full overflow-x-clip">
-      <div className="blob !bg-yellow-cs-30 relative left-1/2 min-h-screen w-[116%] -translate-x-1/2 overflow-hidden rounded-t-[12rem] shadow-[inset_0px_10px_4px_7px_#00000059] sm:w-[108%] sm:rounded-t-[25rem] lg:left-0 lg:w-full lg:translate-x-0">
+      <div className="blob !bg-yellow-cs-30 relative left-1/2 flex min-h-screen w-[116%] -translate-x-1/2 flex-col items-center overflow-hidden rounded-t-[12rem] shadow-[inset_0px_10px_4px_7px_#00000059] sm:w-[108%] sm:rounded-t-[25rem] lg:left-0 lg:w-full lg:translate-x-0">
         <h2
           className="font-rubikone text-blue-cs-30 pt-16 text-center text-[32px] leading-[40px] sm:text-[40px] sm:leading-[52px] lg:text-[56px] lg:leading-[70px]"
           style={getTextStrokeStyle({ color: '#ffffff', width: 2 })}
@@ -111,7 +116,7 @@ const Moments = () => {
           </div>
         </div>
 
-        <div className="relative hidden h-[900px] w-full overflow-hidden lg:block">
+        <div className="relative hidden h-[900px] w-full max-w-[1440px] overflow-hidden lg:block">
           {momentPhotos.map((photo) => (
             <button
               key={photo.id}

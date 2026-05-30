@@ -1,40 +1,72 @@
+import Image from 'next/image'
+
 import { getTextStrokeStyle } from '@/lib/textStroke'
+
+import cloudIcon from '@/assets/images/icon/cloud-2.svg'
 
 const AboutUs = () => {
   return (
     <section id="about-us" className="bg-blue-cs-40 text-neutral-cs-10 w-full">
-      <div className="mx-auto flex w-full max-w-[1260px] flex-col items-center gap-6 px-6 py-16 text-center sm:px-10 lg:px-[90px] lg:py-[110px]">
-        <h2
-          className="font-rubikone text-blue-cs-30 text-[32px] leading-[40px] sm:text-[40px] sm:leading-[52px] lg:text-[56px] lg:leading-[70px]"
-          style={getTextStrokeStyle({ color: '#ffffff', width: 2 })}
-        >
-          About Us
-        </h2>
-
-        <div className="bg-blue-cs-20/60 h-[2px] w-24 lg:w-300" />
-
-        <div className="border-blue-cs-20/60 to-blue-cs-30 relative w-full max-w-[1040px] overflow-hidden rounded-[40px] border bg-gradient-to-b from-[#35569C] px-6 py-10 sm:px-10 sm:py-12 lg:px-[104px] lg:py-[70px]">
-          <div
-            className="pointer-events-none absolute inset-0 z-0"
-            style={{
-              backgroundImage: "url('/assets/images/texture/noise-monotone.svg')",
-              backgroundSize: '170px 170px',
-              mixBlendMode: 'multiply',
-              opacity: 0.5
-            }}
+      <div className="mx-auto flex w-full max-w-[1260px] flex-col items-center gap-8 px-6 py-16 text-center sm:px-10 lg:px-[90px] lg:py-[110px]">
+        <div className="relative flex w-full items-center justify-center">
+          <Image
+            src={cloudIcon}
+            alt=""
             aria-hidden="true"
+            className="pointer-events-none absolute top-4 right-[calc(50%+62px)] bottom-[-6px] z-10 h-auto w-[216px] max-w-none scale-x-[-1] -rotate-12 sm:hidden"
+          />
+          <h2
+            className="font-rubikone text-blue-cs-30 relative z-10 text-[32px] leading-[40px] sm:text-[40px] sm:leading-[52px] lg:text-[56px] lg:leading-[70px]"
+            style={getTextStrokeStyle({ color: '#ffffff', width: 2 })}
+          >
+            About Us
+          </h2>
+          <Image
+            src={cloudIcon}
+            alt=""
+            aria-hidden="true"
+            className="pointer-events-none absolute top-4 bottom-[-6px] left-[calc(50%+62px)] z-0 h-auto w-[216px] max-w-none rotate-12 sm:hidden"
+          />
+        </div>
+
+        <div className="relative w-full max-w-[1040px] overflow-visible">
+          <Image
+            src={cloudIcon}
+            alt=""
+            aria-hidden="true"
+            className="pointer-events-none absolute top-[-50px] left-[-66px] z-20 hidden h-auto w-[260px] max-w-none scale-x-[-1] -rotate-6 sm:block lg:top-[-86px] lg:left-[-128px] lg:w-[450px]"
+          />
+          <Image
+            src={cloudIcon}
+            alt=""
+            aria-hidden="true"
+            className="pointer-events-none absolute right-[-98px] bottom-[-34px] z-20 hidden h-auto w-[260px] max-w-none rotate-6 sm:block lg:right-[-128px] lg:bottom-[-68px] lg:w-[450px]"
           />
 
-          <p className="text-neutral-cs-10 relative z-10 text-base leading-7 font-semibold sm:text-lg sm:leading-8 lg:text-[20px] lg:leading-[33px]">
-            <span className="text-yellow-cs-20">EVASTRA</span> merupakan nama angkatan Teknologi Informasi ITS 2025 yang
-            merepresentasikan semangat untuk berkembang bersama, menguatkan karakter, dan meningkatkan kompetensi.
-            <span className="mt-6 block lg:mt-8">
-              Terinspirasi dari pepatah Latin klasik, “<span className="text-yellow-cs-20">ad astra per aspera</span>”
-              yang berarti, “melalui rintangan, menuju <span className="text-yellow-cs-20">bintang-bintang</span>”.
-              Makna ini menggambarkan <span className="text-yellow-cs-20">EVASTRA</span> yang diharapkan menjadi
-              angkatan yang mampu menghadapi rintangan dan menggapai impiannya.
-            </span>
-          </p>
+          <div className="border-blue-cs-20/60 to-blue-cs-30 relative w-full overflow-hidden rounded-[40px] border bg-gradient-to-b from-[#35569C] px-6 py-10 sm:px-10 sm:py-12 lg:px-[104px] lg:py-[70px]">
+            <div
+              className="pointer-events-none absolute inset-0 z-0"
+              style={{
+                backgroundImage: "url('/assets/images/texture/noise-monotone.svg')",
+                backgroundSize: '170px 170px',
+                mixBlendMode: 'multiply',
+                opacity: 0.5
+              }}
+              aria-hidden="true"
+            />
+
+            <p className="text-neutral-cs-10 relative z-10 text-base leading-7 font-semibold sm:text-lg sm:leading-8 lg:text-[20px] lg:leading-[33px]">
+              <span className="text-yellow-cs-20">EVASTRA</span> merupakan nama angkatan Teknologi Informasi ITS 2025
+              yang merepresentasikan semangat untuk berkembang bersama, menguatkan karakter, dan meningkatkan
+              kompetensi.
+              <span className="mt-6 block lg:mt-8">
+                Terinspirasi dari pepatah Latin klasik, “<span className="text-yellow-cs-20">ad astra per aspera</span>”
+                yang berarti, “melalui rintangan, menuju <span className="text-yellow-cs-20">bintang-bintang</span>”.
+                Makna ini menggambarkan <span className="text-yellow-cs-20">EVASTRA</span> yang diharapkan menjadi
+                angkatan yang mampu menghadapi rintangan dan menggapai impiannya.
+              </span>
+            </p>
+          </div>
         </div>
       </div>
     </section>

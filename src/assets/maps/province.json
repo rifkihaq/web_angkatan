@@ -119,6 +119,26 @@
     "totalMahasiswa": 23,
     "fillClassName": "fill-blue-cs-20"
   },
+  "IDPD": {
+    "province": "Papua Barat Daya",
+    "totalMahasiswa": 0,
+    "fillClassName": "fill-yellow-cs-40"
+  },
+  "IDPE": {
+    "province": "Papua Pegunungan",
+    "totalMahasiswa": 0,
+    "fillClassName": "fill-blue-cs-20"
+  },
+  "IDPS": {
+    "province": "Papua Selatan",
+    "totalMahasiswa": 0,
+    "fillClassName": "fill-blue-cs-30"
+  },
+  "IDPT": {
+    "province": "Papua Tengah",
+    "totalMahasiswa": 0,
+    "fillClassName": "fill-neutral-cs-40"
+  },
   "IDRI": {
     "province": "Riau",
     "totalMahasiswa": 39,

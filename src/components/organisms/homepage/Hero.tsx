@@ -10,6 +10,13 @@ import HeroLogo from '@/assets/images/homepage/hero-logo.webp'
 const Hero = () => {
   const videoRef = useRef<HTMLVideoElement>(null)
 
+  const scrollToAboutUs = () => {
+    document.getElementById('about-us')?.scrollIntoView({
+      behavior: 'smooth',
+      block: 'start'
+    })
+  }
+
   useEffect(() => {
     if (videoRef.current) {
       videoRef.current.play().catch((error) => {
@@ -57,12 +64,13 @@ const Hero = () => {
           </p>
         </div>
 
-        <a
-          href="#about-us"
+        <button
+          type="button"
+          onClick={scrollToAboutUs}
           className="border-neutral-cs-10 text-neutral-cs-10 hover:bg-neutral-cs-10/10 inline-flex h-[57px] w-[164px] items-center justify-center rounded-full border-2 text-base leading-6 font-semibold transition sm:text-lg lg:text-lg"
         >
           Explore
-        </a>
+        </button>
       </div>
     </section>
   )

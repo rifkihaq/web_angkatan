@@ -16,7 +16,7 @@ const Navbar = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false)
   const navItems = [
     { label: 'Home', href: '/' },
-    { label: 'Profil DTI', href: '/profil-dti' },
+    { label: 'Profil DTI', href: '/dti-profile' },
     { label: 'About Us', href: '/about-us' },
     { label: 'Members', href: '/members' },
     { label: 'Fun Corners', href: '/fun-corners' }
