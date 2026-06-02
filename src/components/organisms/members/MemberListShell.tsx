@@ -56,7 +56,7 @@ const MemberListShell = ({ children }: MemberListShellProps) => {
   }, [])
 
   return (
-    <section ref={sectionRef} className="bg-blue-cs-40 relative min-h-[100vh] w-full overflow-hidden">
+    <section ref={sectionRef} className="bg-blue-cs-40 relative min-h-[100vh] w-full">
       <div
         className="pointer-events-none absolute inset-0 z-0 bg-repeat-y opacity-80"
         style={{
@@ -96,7 +96,9 @@ const MemberListShell = ({ children }: MemberListShellProps) => {
         className="pointer-events-none absolute bottom-[1vh] left-0 z-2 h-auto w-full opacity-40 select-none"
       />
 
-      <div className="relative z-20 flex flex-wrap justify-center gap-8 px-6 py-24 sm:px-10 lg:px-20">{children}</div>
+      <div className="relative z-20 -mt-56 flex flex-wrap justify-center gap-8 px-6 py-24 sm:px-10 lg:px-20">
+        {children}
+      </div>
     </section>
   )
 }
