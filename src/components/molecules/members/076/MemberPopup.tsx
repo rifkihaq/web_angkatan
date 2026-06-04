@@ -82,7 +82,7 @@ const MemberPopup = ({ isOpen, onClose }: MemberPopupProps) => {
           <div className="border-neutral-cs-10/40 rounded-xl border p-4">
             {/* UBAH HOBI KAMU */}
             <p className="text-neutral-cs-10/60 text-xs tracking-wide uppercase">Hobi</p>
-            <p className="mt-2">Ngoding</p>
+            <p className="mt-2">ngoding, makan</p>
           </div>
           <div className="border-neutral-cs-10/40 rounded-xl border p-4">
             {/* UBAH FUNFACT KAMU */}
