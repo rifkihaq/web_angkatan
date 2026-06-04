@@ -43,9 +43,12 @@ const DTIProfile = () => {
   return (
     <>
       <Hero />
-      <AboutDti />
-      <Vision />
-      <Mission />
+      <div className="bg-[linear-gradient(180deg,#0B1E38_0%,#0F274F_30%,#122D5F_50%,#173679_70%,#1A3E87_85%,#1F4DA8_100%)]">
+        <AboutDti />
+        <Vision />
+        <Mission />
+      </div>
+
       <Cta />
     </>
   )
