@@ -104,7 +104,7 @@ const MemberPopup = ({ isOpen, onClose }: MemberPopupProps) => {
 
           {/* CONTAINER FOTO PROFIL */}
           <div
-            onClick={() => setIsFlipped(!isFlipped)} // Tambahkan fungsi untuk toggle flip saat foto diklik (buat bantu mobile user)
+            onClick={() => setIsFlipped((prev) => !prev)} // Tambahkan fungsi untuk toggle flip saat foto diklik (buat bantu mobile user)
             className="border-neutral-cs-10/40 group relative z-10 mb-5 cursor-pointer overflow-hidden rounded-2xl border select-none"
           >
             {/* Foto profile asli */}
@@ -113,7 +113,7 @@ const MemberPopup = ({ isOpen, onClose }: MemberPopupProps) => {
             <img
               src={CinemeowImg.src}
               alt="Absolute Cinemeow Overlay"
-              className="${isFlipped ? 'opacity-0' : 'opacity-100'} pointer-events-none absolute inset-0 h-full w-full object-cover object-center transition-opacity duration-500 ease-in-out group-hover:opacity-0"
+              className={`${isFlipped ? 'opacity-0' : 'opacity-100'} pointer-events-none absolute inset-0 h-full w-full object-cover object-center transition-opacity duration-500 ease-in-out group-hover:opacity-0`}
             />
           </div>
 
@@ -156,10 +156,10 @@ const MemberPopup = ({ isOpen, onClose }: MemberPopupProps) => {
               Site ζ: 俺が好きな曲 (Lagu kesukaanku):
             </p>
             <p className="my-2 font-sans text-sm font-semibold">&quot;You&apos;re Mine&quot; — Vestia Zeta</p>
+
             <SpotifyEmbed spotifyUrl="https://open.spotify.com/track/3kK8euC9eUBRwZKpMsQsDZ?si=2337bb62b0bd4ada" />
           </div>
-        </div>{' '}
-        {/* BATAS KOTAK DALAM POPUP */}
+        </div>
       </div>
     </div>,
     document.body
