@@ -1,12 +1,11 @@
 'use client'
 
-import React, { useState, useCallback } from 'react'
+import { useCallback, useEffect, useState } from 'react'
 
 import Image from 'next/image'
 
 import { getTextStrokeStyle } from '@/lib/textStroke'
 
-import cloudIcon from '@/assets/images/dti-profile/awan1.svg'
 import cloudIcon2 from '@/assets/images/dti-profile/awan2.svg'
 import Frame from '@/assets/images/dti-profile/frame-mis.png'
 import useWindowBreakpoint from '@/hooks/useWindowBreakpoint'
@@ -67,7 +66,7 @@ const Mission = () => {
   }, [])
 
   // Handle keyboard navigation
-  React.useEffect(() => {
+  useEffect(() => {
     const handleKeyDown = (event: KeyboardEvent) => {
       if (event.key === 'ArrowLeft') {
         handlePrev()
@@ -83,8 +82,8 @@ const Mission = () => {
   const currentMission = missions[currentIndex]
 
   return (
-    <div className="relative min-h-[670px] w-screen !overflow-x-hidden overflow-y-visible pb-28">
-      <div className="pointer-events-none absolute -top-0 -right-[10%] z-0 -scale-x-100 transform">
+    <section className="relative w-full overflow-hidden px-4 py-16 pb-24 sm:px-8 md:min-h-[670px] md:py-20 md:pb-28 lg:px-16">
+      <div className="pointer-events-none absolute top-0 -right-32 z-0 w-[360px] -scale-x-100 transform sm:w-[480px] lg:-right-[10%] lg:w-[600px]">
         <div className="relative">
           <Image
             src={cloudIcon2}
@@ -97,24 +96,24 @@ const Mission = () => {
       </div>
       <h1
         style={getTextStrokeStyle({ color: '#fff', width: getStrokeWidth() })}
-        className="font-rubikone text-blue-cs-30 relative mt-26 w-auto text-center text-4xl md:text-6xl"
+        className="font-rubikone text-blue-cs-30 relative z-10 w-auto text-center text-4xl leading-tight sm:text-5xl md:text-6xl"
       >
         Mission
       </h1>
 
-      <div className="relative flex w-full items-center justify-center py-8">
-        <div className="relative w-[1200px] max-w-full">
-          <Image src={Frame} alt="Frame" className="h-auto w-full" priority />
+      <div className="relative z-10 mt-8 flex w-full items-center justify-center md:mt-10 md:py-8">
+        <div className="relative w-full max-w-[1200px]">
+          <Image src={Frame} alt="Frame" className="hidden h-auto w-full sm:block" priority />
 
-          <div className="absolute inset-0 flex flex-col items-center justify-center px-10">
-            <p className="animate-in fade-in mt-8 max-w-3xl text-center text-lg leading-relaxed font-semibold text-white transition-all duration-300">
+          <div className="min-h-[260px] rounded-2xl border-2 border-white/70 bg-[#0D294F]/80 px-12 py-10 shadow-[0_16px_40px_rgba(0,0,0,0.24)] sm:absolute sm:inset-0 sm:flex sm:min-h-0 sm:flex-col sm:items-center sm:justify-center sm:rounded-none sm:border-0 sm:bg-transparent sm:px-16 sm:py-0 sm:shadow-none md:px-24">
+            <p className="animate-in fade-in mx-auto max-w-3xl text-center text-sm leading-7 font-semibold text-white transition-all duration-300 sm:text-base md:text-lg md:leading-relaxed">
               {currentMission.content}
             </p>
           </div>
           <button
             onClick={handlePrev}
             aria-label="Previous mission"
-            className="absolute top-1/2 left-2 -translate-y-1/2 cursor-pointer text-3xl font-light text-white transition-all select-none hover:scale-110 hover:text-gray-300 active:scale-95 md:left-4 md:text-6xl lg:left-24"
+            className="absolute top-1/2 left-3 flex h-10 w-10 -translate-y-1/2 cursor-pointer items-center justify-center rounded-full text-3xl leading-none font-light text-white transition-all select-none hover:scale-110 hover:text-gray-300 active:scale-95 sm:left-4 sm:h-12 sm:w-12 md:text-6xl lg:left-24"
           >
             ‹
           </button>
@@ -122,13 +121,13 @@ const Mission = () => {
           <button
             onClick={handleNext}
             aria-label="Next mission"
-            className="absolute top-1/2 right-2 -translate-y-1/2 cursor-pointer text-3xl font-light text-white transition-all select-none hover:scale-110 hover:text-gray-300 active:scale-95 md:right-4 md:text-6xl lg:right-24"
+            className="absolute top-1/2 right-3 flex h-10 w-10 -translate-y-1/2 cursor-pointer items-center justify-center rounded-full text-3xl leading-none font-light text-white transition-all select-none hover:scale-110 hover:text-gray-300 active:scale-95 sm:right-4 sm:h-12 sm:w-12 md:text-6xl lg:right-24"
           >
             ›
           </button>
         </div>
       </div>
-    </div>
+    </section>
   )
 }
 

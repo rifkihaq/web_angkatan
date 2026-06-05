@@ -45,11 +45,11 @@ export const metadata = defineMetadata({
 
 const DTIProfile = () => {
   return (
-    <>
+    <main className="w-full overflow-hidden">
       <Hero />
       <div className="bg-[linear-gradient(180deg,#0B1E38_0%,#0F274F_30%,#122D5F_50%,#173679_70%,#1A3E87_85%,#1F4DA8_100%)]">
         <AboutDti />
-        <div className="relative min-h-screen w-full overflow-hidden">
+        <div className="relative w-full overflow-hidden">
           <div className="pointer-events-none absolute inset-0 -bottom-4 z-0 opacity-50">
             <Image src={aboutUsBg} alt="About Us Background" fill priority className="object-cover object-top" />
           </div>
@@ -59,7 +59,7 @@ const DTIProfile = () => {
       </div>
 
       <Cta />
-    </>
+    </main>
   )
 }
 

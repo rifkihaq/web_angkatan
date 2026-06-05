@@ -2,25 +2,14 @@
 
 import { useEffect, useRef } from 'react'
 
-import Image from 'next/image'
-
 import { getTextStrokeStyle } from '@/lib/textStroke'
 
 import Star from '@/components/atoms/icon/Star'
 
-// PERBAIKAN PATH: Gunakan path public agar tidak error "Module not found"
-import HeroLogo from '@/assets/images/homepage/hero-logo.webp'
 import useWindowBreakpoint from '@/hooks/useWindowBreakpoint'
 
 const Hero = () => {
   const videoRef = useRef<HTMLVideoElement>(null)
-
-  const scrollToAboutUs = () => {
-    document.getElementById('about-us')?.scrollIntoView({
-      behavior: 'smooth',
-      block: 'start'
-    })
-  }
 
   const breakpoint = useWindowBreakpoint()
 
@@ -63,7 +52,7 @@ const Hero = () => {
   return (
     <section
       id="hero"
-      className="bg-blue-cs-40 text-neutral-cs-10 relative flex w-full items-center justify-center overflow-hidden py-36 md:py-16"
+      className="bg-blue-cs-40 text-neutral-cs-10 relative flex min-h-[520px] w-full items-center justify-center overflow-hidden py-24 sm:min-h-[600px] md:py-16"
     >
       {/* 1. LAYER VIDEO: Tanpa z-index (Otomatis paling bawah) */}
       <video
@@ -82,11 +71,11 @@ const Hero = () => {
       <div className="from-blue-cs-30/20 to-blue-cs-40 absolute inset-0 bg-gradient-to-b" aria-hidden="true" />
 
       {/* 3. LAYER KONTEN: Cukup z-10 agar di atas background, sangat aman untuk Navbar */}
-      <div className="relative z-10 flex min-h-[320px] w-full max-w-[1260px] flex-col items-center gap-10 px-6 py-24 text-center sm:px-10 lg:min-h-[470px] lg:gap-[52px] lg:px-[90px] lg:py-[136px]">
+      <div className="relative z-10 flex min-h-[320px] w-full max-w-[1260px] flex-col items-center justify-center gap-8 px-6 py-16 text-center sm:px-10 md:gap-10 lg:min-h-screen lg:gap-[52px] lg:px-[90px] lg:py-[136px]">
         <div>
           <h1
             style={getTextStrokeStyle({ color: '#fff', width: getStrokeWidth() })}
-            className="font-rubikone text-blue-cs-30 relative w-auto text-4xl md:text-6xl"
+            className="font-rubikone text-blue-cs-30 relative w-auto max-w-[11ch] text-4xl leading-tight sm:max-w-none md:text-6xl"
           >
             Profil Departemen
             <span>
@@ -98,7 +87,7 @@ const Hero = () => {
             </span>
           </h1>
         </div>
-        <p className="w-full text-center text-lg leading-8 font-semibold md:text-xl lg:w-3/4 lg:text-2xl">
+        <p className="w-full max-w-3xl text-center text-sm leading-7 font-semibold md:text-xl md:leading-8 lg:text-lg lg:leading-9">
           Merancang arsitektur sistem masa depan dan mengamankan ekosistem digital.
         </p>
       </div>
