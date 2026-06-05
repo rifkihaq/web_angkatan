@@ -6,6 +6,8 @@ import Image from 'next/image'
 
 import { getTextStrokeStyle } from '@/lib/textStroke'
 
+import cloudIcon from '@/assets/images/dti-profile/awan1.svg'
+import cloudIcon2 from '@/assets/images/dti-profile/awan2.svg'
 import Frame from '@/assets/images/dti-profile/frame-mis.png'
 import useWindowBreakpoint from '@/hooks/useWindowBreakpoint'
 
@@ -15,31 +17,24 @@ const missions = [
     id: 1,
     title: 'Mission 1',
     content:
-      'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris.'
+      'Menyelenggarakan pendidikan dan pengajaran Teknologi Informasi dengan menggunakan kurikulum yang adaptif, berorientasi ke masa depan dan didukung Sumber Daya Manusia yang berkualitas serta fasilitas yang memadai.'
   },
   {
     id: 2,
     title: 'Mission 2',
     content:
-      'Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt.'
+      'Melaksanakan penelitian yang bermutu di bidang Cybersecurity, System Integration dan Cloud Computing Services, serta Internet of Things for Smart City.'
   },
   {
     id: 3,
     title: 'Mission 3',
-    content:
-      'Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto.'
+    content: 'Menjalin kemitraan dengan instansi dalam maupun luar negeri.'
   },
   {
     id: 4,
     title: 'Mission 4',
     content:
-      'Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur magni dolores eos qui ratione voluptatem sequi nesciunt. Neque porro quisquam est.'
-  },
-  {
-    id: 5,
-    title: 'Mission 5',
-    content:
-      'At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis praesentium voluptatum deleniti atque corrupti quos dolores et quas molestias excepturi sint occaecati.'
+      'Menyelenggarakan pengabdian kepada masyarakat berupa pelatihan, penyuluhan, penerapan hasil penelitian untuk pengembangan potensi dan pemberdayaan masyarakat daerah.'
   }
 ]
 
@@ -88,7 +83,18 @@ const Mission = () => {
   const currentMission = missions[currentIndex]
 
   return (
-    <div className="min-h-[600px] w-screen !overflow-x-hidden overflow-y-visible">
+    <div className="relative min-h-[670px] w-screen !overflow-x-hidden overflow-y-visible pb-28">
+      <div className="pointer-events-none absolute -top-0 -right-[10%] z-0 -scale-x-100 transform">
+        <div className="relative">
+          <Image
+            src={cloudIcon2}
+            alt="Cloud decoration"
+            width={600}
+            height={150}
+            className="h-auto w-full object-contain opacity-90"
+          />
+        </div>
+      </div>
       <h1
         style={getTextStrokeStyle({ color: '#fff', width: getStrokeWidth() })}
         className="font-rubikone text-blue-cs-30 relative mt-26 w-auto text-center text-4xl md:text-6xl"
@@ -101,16 +107,14 @@ const Mission = () => {
           <Image src={Frame} alt="Frame" className="h-auto w-full" priority />
 
           <div className="absolute inset-0 flex flex-col items-center justify-center px-10">
-            <p className="animate-in fade-in max-w-3xl text-center text-lg leading-relaxed text-white transition-all duration-300">
+            <p className="animate-in fade-in mt-8 max-w-3xl text-center text-lg leading-relaxed font-semibold text-white transition-all duration-300">
               {currentMission.content}
             </p>
           </div>
-
-          {/* Navigation Buttons - positioned exactly on frame edges */}
           <button
             onClick={handlePrev}
             aria-label="Previous mission"
-            className="absolute top-1/2 left-2 -translate-y-1/2 cursor-pointer text-5xl font-light text-white transition-all select-none hover:scale-110 hover:text-gray-300 active:scale-95 md:left-4 md:text-6xl lg:left-24"
+            className="absolute top-1/2 left-2 -translate-y-1/2 cursor-pointer text-3xl font-light text-white transition-all select-none hover:scale-110 hover:text-gray-300 active:scale-95 md:left-4 md:text-6xl lg:left-24"
           >
             ‹
           </button>
@@ -118,7 +122,7 @@ const Mission = () => {
           <button
             onClick={handleNext}
             aria-label="Next mission"
-            className="absolute top-1/2 right-2 -translate-y-1/2 cursor-pointer text-5xl font-light text-white transition-all select-none hover:scale-110 hover:text-gray-300 active:scale-95 md:right-4 md:text-6xl lg:right-24"
+            className="absolute top-1/2 right-2 -translate-y-1/2 cursor-pointer text-3xl font-light text-white transition-all select-none hover:scale-110 hover:text-gray-300 active:scale-95 md:right-4 md:text-6xl lg:right-24"
           >
             ›
           </button>

@@ -1,3 +1,5 @@
+import Image from 'next/image'
+
 import { defineMetadata, getMetadataBase } from '@/lib/metadata'
 
 import AboutDti from '@/components/organisms/dti-profile/AboutDti'
@@ -5,6 +7,8 @@ import Cta from '@/components/organisms/dti-profile/Cta'
 import Hero from '@/components/organisms/dti-profile/Hero'
 import Mission from '@/components/organisms/dti-profile/Mission'
 import Vision from '@/components/organisms/dti-profile/Vision'
+
+import aboutUsBg from '@/assets/images/about-us/about-us-bg.png'
 
 export const metadata = defineMetadata({
   title: 'DTI Profile - Evastra',
@@ -45,8 +49,13 @@ const DTIProfile = () => {
       <Hero />
       <div className="bg-[linear-gradient(180deg,#0B1E38_0%,#0F274F_30%,#122D5F_50%,#173679_70%,#1A3E87_85%,#1F4DA8_100%)]">
         <AboutDti />
-        <Vision />
-        <Mission />
+        <div className="relative min-h-screen w-full overflow-hidden">
+          <div className="pointer-events-none absolute inset-0 -bottom-4 z-0 opacity-50">
+            <Image src={aboutUsBg} alt="About Us Background" fill priority className="object-cover object-top" />
+          </div>
+          <Vision />
+          <Mission />
+        </div>
       </div>
 
       <Cta />

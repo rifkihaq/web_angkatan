@@ -7,6 +7,7 @@ import Image from 'next/image'
 import { getTextStrokeStyle } from '@/lib/textStroke'
 
 import Frame from '@/assets/images/dti-profile/ara7.jpg'
+import cloudIcon2 from '@/assets/images/dti-profile/awan3.svg'
 import Bg from '@/assets/images/dti-profile/cta.png'
 import useWindowBreakpoint from '@/hooks/useWindowBreakpoint'
 
@@ -29,7 +30,17 @@ const Cta = () => {
 
   return (
     <div className="relative min-h-[750px] w-screen !overflow-x-hidden overflow-y-visible px-24">
-      {/* Gunakan img biasa dulu untuk testing */}
+      <div className="pointer-events-none absolute -top-0 -left-[10%] z-10 h-auto w-1/2 scale-x-100 transform">
+        <div className="relative">
+          <Image
+            src={cloudIcon2}
+            alt="Cloud decoration"
+            width={600}
+            height={150}
+            className="h-auto w-full object-contain opacity-90"
+          />
+        </div>
+      </div>
       <img src={Bg.src} alt="Background" className="absolute inset-0 h-full w-full object-cover" />
 
       <div className="relative z-10">
@@ -42,7 +53,6 @@ const Cta = () => {
       </div>
 
       <div className="card-con relative z-10 flex w-full flex-wrap justify-between gap-4 px-4 pt-36 md:flex-nowrap md:gap-6">
-        {/* Card 1 */}
         <div
           className="card w-full overflow-hidden p-4 md:w-[33%]"
           style={{
@@ -52,7 +62,7 @@ const Cta = () => {
           }}
         >
           <div className="relative w-full">
-            <div className="relative aspect-4/3 w-full">
+            <div className="relative aspect-3/2 w-full">
               <Image
                 src={Frame}
                 alt="Video thumbnail"
@@ -62,7 +72,6 @@ const Cta = () => {
               />
             </div>
 
-            {/* Phil Label - placed below image */}
             <div
               className="mt-3 w-full"
               style={{
@@ -72,13 +81,11 @@ const Cta = () => {
               }}
             >
               <div className="px-4 py-2 text-center">
-                <p className="text-sm font-semibold text-white md:text-base">Premium Content</p>
+                <p className="text-sm font-semibold text-white md:text-base">Juara 1 CTF </p>
               </div>
             </div>
           </div>
         </div>
-
-        {/* Card 2 */}
         <div
           className="card w-full overflow-hidden p-4 md:w-[33%]"
           style={{
@@ -88,7 +95,7 @@ const Cta = () => {
           }}
         >
           <div className="relative w-full">
-            <div className="relative aspect-video w-full">
+            <div className="relative aspect-3/2 w-full">
               <Image
                 src={Frame}
                 alt="Video thumbnail"
@@ -98,7 +105,6 @@ const Cta = () => {
               />
             </div>
 
-            {/* Phil Label - placed below image */}
             <div
               className="mt-3 w-full"
               style={{
@@ -108,13 +114,11 @@ const Cta = () => {
               }}
             >
               <div className="px-4 py-2 text-center">
-                <p className="text-sm font-semibold text-white md:text-base">Featured</p>
+                <p className="text-sm font-semibold text-white md:text-base">Juara 1 CTF </p>
               </div>
             </div>
           </div>
         </div>
-
-        {/* Card 3 */}
         <div
           className="card w-full overflow-hidden p-4 md:w-[33%]"
           style={{
@@ -124,7 +128,7 @@ const Cta = () => {
           }}
         >
           <div className="relative w-full">
-            <div className="relative aspect-video w-full">
+            <div className="relative aspect-3/2 w-full">
               <Image
                 src={Frame}
                 alt="Video thumbnail"
@@ -134,7 +138,6 @@ const Cta = () => {
               />
             </div>
 
-            {/* Phil Label - placed below image */}
             <div
               className="mt-3 w-full"
               style={{
@@ -144,7 +147,7 @@ const Cta = () => {
               }}
             >
               <div className="px-4 py-2 text-center">
-                <p className="text-sm font-semibold text-white md:text-base">New Release</p>
+                <p className="text-sm font-semibold text-white md:text-base">Juara 1 CTF </p>
               </div>
             </div>
           </div>

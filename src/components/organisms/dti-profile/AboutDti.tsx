@@ -6,6 +6,8 @@ import Image from 'next/image'
 
 import { getTextStrokeStyle } from '@/lib/textStroke'
 
+import cloudIcon from '@/assets/images/dti-profile/awan1.svg'
+import cloudIcon2 from '@/assets/images/dti-profile/awan2.svg'
 import Tower2 from '@/assets/images/dti-profile/tw.png'
 import useWindowBreakpoint from '@/hooks/useWindowBreakpoint'
 
@@ -26,11 +28,33 @@ const AboutDti = () => {
     }
   }
   return (
-    <div className="flex min-h-[780px] w-screen justify-between !overflow-x-hidden overflow-y-visible pl-24">
+    <div className="relative flex min-h-[780px] w-screen justify-between !overflow-x-hidden !overflow-y-visible pl-24">
+      <div className="pointer-events-none absolute -top-0 -left-[20%] z-0 -scale-x-100 transform">
+        <div className="relative">
+          <Image
+            src={cloudIcon}
+            alt="Cloud decoration"
+            width={600}
+            height={150}
+            className="h-auto w-full object-contain opacity-90"
+          />
+        </div>
+      </div>
+      <div className="pointer-events-none absolute top-36 left-[25%] z-0 -scale-x-100 transform">
+        <div className="relative">
+          <Image
+            src={cloudIcon2}
+            alt="Cloud decoration"
+            width={600}
+            height={150}
+            className="h-auto w-full object-contain opacity-90"
+          />
+        </div>
+      </div>
       <div className="left w-1/2">
         <h1
           style={getTextStrokeStyle({ color: '#fff', width: getStrokeWidth() })}
-          className="font-rubikone text-blue-cs-30 relative mt-26 w-auto text-4xl md:text-6xl"
+          className="font-rubikone text-blue-cs-30 relative mt-36 w-auto text-4xl md:text-6xl"
         >
           Who We Are
         </h1>
@@ -46,13 +70,13 @@ const AboutDti = () => {
           <b>beroperasi secara efisien dan aman.</b>
         </p>
       </div>
-      <div className="right w-1/2">
+      <div className="right relative w-1/2">
         <Image
           src={Tower2}
           alt="tower 2"
           width={800}
           height={1000}
-          className="ml-auto h-auto origin-top scale-140 transform"
+          className="absolute -right-16 ml-auto h-auto origin-top scale-140 transform"
           priority
         />
       </div>
