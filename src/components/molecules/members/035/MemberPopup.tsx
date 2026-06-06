@@ -1,15 +1,16 @@
 'use client'
 
 import React, { useEffect } from 'react'
-import { createPortal } from 'react-dom'
 
 import Image from 'next/image'
+
+import { createPortal } from 'react-dom'
 
 import Instagram from '@/components/atoms/button/InstagramButtonLink'
 import LinkedInButtonLink from '@/components/atoms/button/LinkedInButtonLink'
 import SpotifyEmbed from '@/components/molecules/SpotifyEmbed'
 
-import ProfileImage from './image.png'
+import ProfileImage from './image.jpeg'
 
 type MemberPopupProps = {
   isOpen: boolean
