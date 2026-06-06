@@ -1,6 +1,7 @@
 'use client'
 
 import React, { useEffect, useState, useRef } from 'react'
+import { createPortal } from 'react-dom'
 
 import Image from 'next/image'
 
@@ -319,6 +320,17 @@ const startBattleMusic = async () => {
 
       {/* CONTENT */}
       <div className="relative z-10 max-h-[calc(100vh-9rem)] overflow-y-auto p-6 text-white sm:p-8">
+  return createPortal(
+    // PADA BAGIAN INI KAMU BOLEH MENGUBAH STYLE SESUKA HATI KAMU, TAPI JANGAN UBAH STRUKTUR DAN FUNGSI DARI KODE INI AGAR FUNGSI POPUP TETAP BERJALAN DENGAN BAIK
+    <div className="fixed inset-0 z-[100] flex items-start justify-center overflow-y-auto px-4">
+      <button
+        type="button"
+        aria-label="Close member detail"
+        onClick={onClose}
+        className="absolute inset-0 bg-black/60 backdrop-blur-sm"
+      />
+
+      <div className="border-neutral-cs-10 bg-blue-cs-40 relative z-10 max-h-[100dvh] w-full max-w-[720px] animate-[member-popup-show_200ms_ease-out] overflow-y-auto rounded-2xl border-2 p-6 text-white shadow-xl sm:p-8">
         <button
           type="button"
           aria-label="Close member detail"
@@ -438,9 +450,9 @@ const startBattleMusic = async () => {
           <SpotifyEmbed spotifyUrl="https://open.spotify.com/track/4ly9rdCe3PvcYZdAN72T3b?si=d97704d1f4934bba" />
         </div>
       </div>
-    </div>
-  </div>
-)
+    </div>,
+    document.body
+  )
 }
 
 export default MemberPopup
