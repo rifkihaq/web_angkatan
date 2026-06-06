@@ -1,17 +1,16 @@
 'use client'
 
-import React, { useEffect } from 'react'
-import { createPortal } from 'react-dom'
-
-import { useState } from "react";
-import TetrisGate from "./TetrisGate";
+import { useCallback, useEffect, useState } from 'react'
 
 import Image from 'next/image'
+
+import { createPortal } from 'react-dom'
 
 import Instagram from '@/components/atoms/button/InstagramButtonLink'
 import LinkedInButtonLink from '@/components/atoms/button/LinkedInButtonLink'
 import SpotifyEmbed from '@/components/molecules/SpotifyEmbed'
 
+import TetrisGate from './TetrisGate'
 import ProfileImage from './image.jpg'
 
 type MemberPopupProps = {
@@ -20,7 +19,13 @@ type MemberPopupProps = {
 }
 
 const MemberPopup = ({ isOpen, onClose }: MemberPopupProps) => {
-  const [passed, setPassed] = useState(false);
+  const [passed, setPassed] = useState(false)
+
+  const handleClose = useCallback(() => {
+    setPassed(false)
+    onClose()
+  }, [onClose])
+
   useEffect(() => {
     if (!isOpen) {
       return
@@ -28,7 +33,7 @@ const MemberPopup = ({ isOpen, onClose }: MemberPopupProps) => {
 
     const handleKeyDown = (event: KeyboardEvent) => {
       if (event.key === 'Escape') {
-        onClose()
+        handleClose()
       }
     }
 
@@ -39,24 +44,23 @@ const MemberPopup = ({ isOpen, onClose }: MemberPopupProps) => {
       document.body.style.overflow = ''
       window.removeEventListener('keydown', handleKeyDown)
     }
-  }, [isOpen, onClose])
+  }, [isOpen, handleClose])
 
   if (!isOpen) {
     return null
   }
 
-   if (!passed) {
-    return <TetrisGate onSuccess={() => setPassed(true)} />;
+  if (!passed) {
+    return createPortal(<TetrisGate onSuccess={() => setPassed(true)} />, document.body)
   }
 
   return createPortal(
-
     // PADA BAGIAN INI KAMU BOLEH MENGUBAH STYLE SESUKA HATI KAMU, TAPI JANGAN UBAH STRUKTUR DAN FUNGSI DARI KODE INI AGAR FUNGSI POPUP TETAP BERJALAN DENGAN BAIK
     <div className="fixed inset-0 z-[100] flex items-start justify-center overflow-y-auto px-4">
       <button
         type="button"
         aria-label="Close member detail"
-        onClick={onClose}
+        onClick={handleClose}
         className="absolute inset-0 bg-[#050E1C]/80 backdrop-blur-sm"
       />
 
@@ -64,7 +68,7 @@ const MemberPopup = ({ isOpen, onClose }: MemberPopupProps) => {
         <button
           type="button"
           aria-label="Close member detail"
-          onClick={onClose}
+          onClick={handleClose}
           className="absolute top-4 right-4 flex h-9 w-9 items-center justify-center rounded-full border border-[#1E3A5F] text-xl leading-none text-[#7EB8E8] hover:bg-[#1E3A5F]/30"
         >
           x
@@ -91,23 +95,22 @@ const MemberPopup = ({ isOpen, onClose }: MemberPopupProps) => {
         <div className="mt-6 grid gap-4 text-sm font-semibold sm:grid-cols-2">
           <div className="rounded-xl border border-[#1E3A5F] bg-[#0D1F3A] p-4">
             {/* UBAH HOBI KAMU */}
-            <p className="text-xs tracking-wide uppercase text-[#4A7FA8]">Hobi</p>
+            <p className="text-xs tracking-wide text-[#4A7FA8] uppercase">Hobi</p>
             <p className="mt-2 text-[#B8D8F0]">Turu 24/7</p>
           </div>
           <div className="rounded-xl border border-[#1E3A5F] bg-[#0D1F3A] p-4">
             {/* UBAH FUNFACT KAMU */}
-            <p className="text-xs tracking-wide uppercase text-[#4A7FA8]">Fun Fact</p>
-            <p className="mt-2 text-[#B8D8F0]">BHAAP APA YH, currently "bhap-bhap" hehe, 
-                                cinta kopsus tetangga tuku, 
-                                cinta kopsus kluarga famima, 
-                                cinta caramel macchiato point, 
-                                cinta bumi latte fore</p>
+            <p className="text-xs tracking-wide text-[#4A7FA8] uppercase">Fun Fact</p>
+            <p className="mt-2 text-[#B8D8F0]">
+              BHAAP APA YH, currently &quot;bhap-bhap&quot; hehe, cinta kopsus tetangga tuku, cinta kopsus kluarga
+              famima, cinta caramel macchiato point, cinta bumi latte fore
+            </p>
           </div>
         </div>
 
         <div className="mt-4 rounded-xl border border-[#1E3A5F] bg-[#0D1F3A] p-4">
           {/* UBAH LAGU FAVORIT KAMU */}
-          <p className="text-xs font-bold tracking-wide uppercase text-[#4A7FA8]">Lagu Favorit</p>
+          <p className="text-xs font-bold tracking-wide text-[#4A7FA8] uppercase">Lagu Favorit</p>
           <p className="my-2 text-sm font-semibold text-[#E8F4FF]">Disillusioned</p>
 
           {/* UBAH URL SPOTIFY KAMU DENGAN LAGU FAVORIT MU */}
