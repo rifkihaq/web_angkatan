@@ -56,7 +56,7 @@ const MemberPopup = ({ isOpen, onClose }: MemberPopupProps) => {
   return createPortal(
     // PADA BAGIAN INI KAMU BOLEH MENGUBAH STYLE SESUKA HATI KAMU, TAPI JANGAN UBAH STRUKTUR DAN FUNGSI DARI KODE INI AGAR FUNGSI POPUP TETAP BERJALAN DENGAN BAIK
     <div
-      className={`fixed inset-0 z-[100] flex items-start justify-center overflow-y-auto px-4 pt-28 pb-8 sm:pt-32 ${bodyFont.className}`}
+      className={`fixed inset-0 z-[100] flex items-start justify-center overflow-hidden px-4 ${bodyFont.className}`}
     >
       <button
         type="button"
@@ -66,7 +66,7 @@ const MemberPopup = ({ isOpen, onClose }: MemberPopupProps) => {
       />
 
       <div
-        className="relative z-10 max-h-screen w-full max-w-[720px] animate-[member-popup-show_200ms_ease-out] overflow-y-auto rounded-[28px] border-2 border-white/60 p-6 text-white shadow-[0_0_45px_rgba(96,165,250,0.45)] sm:p-8"
+        className="relative z-10 h-[100dvh] max-h-[100dvh] w-full max-w-[720px] animate-[member-popup-show_200ms_ease-out] overflow-y-auto rounded-[28px] border-2 border-white/60 p-6 text-white shadow-[0_0_45px_rgba(96,165,250,0.45)] sm:p-8"
         style={{
           backgroundImage: `linear-gradient(rgba(9, 26, 52, 0.35), rgba(9, 26, 52, 0.5)), url(${BackgroundImage.src})`,
           backgroundSize: 'cover',
@@ -97,7 +97,7 @@ const MemberPopup = ({ isOpen, onClose }: MemberPopupProps) => {
           type="button"
           aria-label="Close member detail"
           onClick={onClose}
-          className="absolute top-4 right-4 flex h-11 w-11 items-center justify-center rounded-full border border-white/60 bg-white/10 text-2xl leading-none text-white shadow-[0_0_22px_rgba(255,255,255,0.45)] backdrop-blur-md transition hover:bg-white/20 hover:shadow-[0_0_30px_rgba(255,255,255,0.7)]"
+          className="absolute top-4 right-4 z-20 flex h-11 w-11 items-center justify-center rounded-full border border-white/60 bg-white/10 text-2xl leading-none text-white shadow-[0_0_22px_rgba(255,255,255,0.45)] backdrop-blur-md transition hover:bg-white/20 hover:shadow-[0_0_30px_rgba(255,255,255,0.7)]"
         >
           ×
         </button>
