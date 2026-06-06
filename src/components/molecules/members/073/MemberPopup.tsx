@@ -1,6 +1,7 @@
 'use client'
 
 import React, { useEffect } from 'react'
+import { createPortal } from 'react-dom'
 
 import Image from 'next/image'
 
@@ -40,9 +41,9 @@ const MemberPopup = ({ isOpen, onClose }: MemberPopupProps) => {
     return null
   }
 
-  return (
+  return createPortal(
     // PADA BAGIAN INI KAMU BOLEH MENGUBAH STYLE SESUKA HATI KAMU, TAPI JANGAN UBAH STRUKTUR DAN FUNGSI DARI KODE INI AGAR FUNGSI POPUP TETAP BERJALAN DENGAN BAIK
-    <div className="fixed inset-0 z-[100] flex items-start justify-center overflow-y-auto px-4 pt-28 pb-8 sm:pt-32">
+    <div className="fixed inset-0 z-[100] flex items-start justify-center overflow-y-auto px-4">
       <button
         type="button"
         aria-label="Close member detail"
@@ -51,6 +52,7 @@ const MemberPopup = ({ isOpen, onClose }: MemberPopupProps) => {
       />
 
       <div className="border-pink-200 bg-gradient-to-br from-pink-400 via-fuchsia-500 to-fuchsia-900 relative z-10 max-h-[calc(100vh-9rem)] w-full max-w-[720px] animate-[member-popup-show_200ms_ease-out] overflow-y-auto rounded-2xl border-2 p-6 text-white shadow-2xl ring-1 ring-pink-100/20 sm:max-h-[calc(100vh-10rem)] sm:p-8">
+
         <button
           type="button"
           aria-label="Close member detail"
@@ -85,7 +87,7 @@ const MemberPopup = ({ isOpen, onClose }: MemberPopupProps) => {
         <div className="mt-6 grid gap-4 text-sm font-semibold sm:grid-cols-2">
           <div className="border-pink-200/40 bg-pink-100/10 rounded-xl border p-4 backdrop-blur-sm">
             {/* UBAH HOBI KAMU */}
-            <p className="text-neutral-cs-10/60 text-xs tracking-wide uppercase">Hobi</p>
+            <p className="text-pink-200 text-xs tracking-widest uppercase">Hobi</p>
             <p className="mt-2">Bikin puisi, nggambar, dengerin lagu Yowis Ben</p>
           </div>
           <div className="border-pink-200/40 bg-fuchsia-200/10 hover:border-pink-100 hover:bg-fuchsia-100/20 rounded-xl border p-4 transition-colors backdrop-blur-sm">
@@ -104,7 +106,8 @@ const MemberPopup = ({ isOpen, onClose }: MemberPopupProps) => {
           <SpotifyEmbed spotifyUrl="https://open.spotify.com/track/3AAAGS7iM1ekDywqdYMJG2?si=pDg9SaHgTNqdlLN-AmweuQ" />
         </div>
       </div>
-    </div>
+    </div>,
+    document.body
   )
 }
 
