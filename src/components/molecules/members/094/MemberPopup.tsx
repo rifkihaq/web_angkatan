@@ -42,8 +42,8 @@ const MemberPopup = ({ isOpen, onClose }: MemberPopupProps) => {
   }
 
   return createPortal(
-    //* PADA BAGIAN INI KAMU BOLEH MENGUBAH STYLE SESUKA HATI KAMU, TAPI JANGAN UBAH STRUKTUR DAN FUNGSI DARI KODE INI AGAR FUNGSI POPUP TETAP BERJALAN DENGAN BAIK */}
-<div className="fixed  inset-0 z-[100] flex items-start justify-center max-h-screen overflow-y-auto px-4 pt-28 pb-8 sm:pt-32 bg-black/40 backdrop-blur-md group/modal">
+    // PADA BAGIAN INI KAMU BOLEH MENGUBAH STYLE SESUKA HATI KAMU, TAPI JANGAN UBAH STRUKTUR DAN FUNGSI DARI KODE INI AGAR FUNGSI POPUP TETAP BERJALAN DENGAN BAIK
+<div className="group/modal fixed inset-0 z-[100] flex items-start justify-center overflow-hidden bg-black/40 px-4 backdrop-blur-md">
   
   {/* INLINE CUSTOM ANIMATION - Menghasilkan efek kelas dunia tanpa merusak config project */}
   <style>{`
@@ -85,7 +85,7 @@ const MemberPopup = ({ isOpen, onClose }: MemberPopupProps) => {
   />
 
   {/* MAIN CONTAINER: Diubah menjadi tekstur Grimoire kulit hitam legam dengan border api Fire Force */}
-  <div className="relative z-10 max-h-[calc(100vh-9rem)] w-full max-w-[720px] overflow-y-auto p-6 sm:max-h-[calc(100vh-10rem)] sm:p-8 rounded-2xl border-2 text-white shadow-2xl transition-all duration-500 ease-out select-none cursor-pointer
+  <div className="relative z-10 h-[100dvh] max-h-[100dvh] w-full max-w-[720px] overflow-y-auto p-6 sm:p-8 rounded-2xl border-2 text-white shadow-2xl transition-all duration-500 ease-out select-none cursor-pointer
     bg-[radial-gradient(ellipse_at_top,_var(--tw-gradient-stops))] from-neutral-900 via-[#0d0707] to-black
     border-orange-600/40 hover:border-orange-500 group/card animate-fire-active
     active:scale-[0.99] active:rotate-1">
@@ -167,9 +167,6 @@ const MemberPopup = ({ isOpen, onClose }: MemberPopupProps) => {
         MANUAL BOOK VII // CLICK OR SWIPE TO ENGAGE
       </div>
     </div>
-
-  </div>
-</div>
 
         <div className="pr-10">
           {/* UBAH NAMA ANDA */}
