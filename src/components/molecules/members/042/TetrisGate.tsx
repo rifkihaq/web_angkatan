@@ -1,5 +1,7 @@
 'use client'
 
+/* eslint-disable react-hooks/exhaustive-deps -- The game loop intentionally reads from a stable mutable state ref. */
+
 import { useEffect, useRef, useCallback, useState } from 'react'
 
 const COLS = 10
