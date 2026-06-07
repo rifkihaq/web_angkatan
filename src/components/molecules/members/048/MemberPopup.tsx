@@ -15,7 +15,7 @@ type MemberPopupProps = {
   onClose: () => void
 }
 
-const MemberPopup = ({ isOpen, onClose }: MemberPopupProps) => 
+const MemberPopup = ({ isOpen, onClose }: MemberPopupProps) => {
   useEffect(() => {
     if (!isOpen) {
       return
@@ -96,7 +96,7 @@ const MemberPopup = ({ isOpen, onClose }: MemberPopupProps) =>
           <p className="my-2 text-sm font-semibold">Sunsetz</p>
 
           {/* UBAH URL SPOTIFY KAMU DENGAN LAGU FAVORIT MU */}
-          <SpotifyEmbed spotifyUrl="https://open.spotify.com/track/0yuAWlxq59xT3agQ965OxE?si=xJgvh7N5TEaJkS26EnMQkw />
+          <SpotifyEmbed spotifyUrl="https://open.spotify.com/track/0yuAWlxq59xT3agQ965OxE?si=xJgvh7N5TEaJkS26EnMQkw"/>
         </div>
       </div>
     </div>
