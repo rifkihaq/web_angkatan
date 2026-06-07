@@ -1,6 +1,12 @@
 'use client'
 
+<<<<<<< HEAD
 import React, { useEffect, useState, useCallback } from 'react'
+=======
+import React, { useEffect } from 'react'
+import { createPortal } from 'react-dom'
+
+>>>>>>> 169739082a16e9afddc6b3cd417d941e91a3212e
 import Image from 'next/image'
 import Instagram from '@/components/atoms/button/InstagramButtonLink'
 import LinkedInButtonLink from '@/components/atoms/button/LinkedInButtonLink'
@@ -155,7 +161,12 @@ const MemberPopup = ({ isOpen, onClose }: MemberPopupProps) => {
 
   const currentQ = quizPool[Math.min(step, 2)]
 
+<<<<<<< HEAD
   return (
+=======
+  return createPortal(
+    // PADA BAGIAN INI KAMU BOLEH MENGUBAH STYLE SESUKA HATI KAMU, TAPI JANGAN UBAH STRUKTUR DAN FUNGSI DARI KODE INI AGAR FUNGSI POPUP TETAP BERJALAN DENGAN BAIK
+>>>>>>> 169739082a16e9afddc6b3cd417d941e91a3212e
     <div className="fixed inset-0 z-[100] flex items-start justify-center overflow-y-auto px-4 pt-28 pb-8 sm:pt-32">
 
       <style>{`
@@ -461,7 +472,8 @@ const MemberPopup = ({ isOpen, onClose }: MemberPopupProps) => {
         )}
 
       </div>
-    </div>
+    </div>,
+    document.body
   )
 }
 
