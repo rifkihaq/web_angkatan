@@ -149,7 +149,7 @@ const MemberPopup = ({ isOpen, onClose }: MemberPopupProps) => {
           <div className="mt-4 rounded-xl border-[3px] border-[#A8C0D6]/85 bg-white/25 backdrop-blur-md p-4">
             {/* UBAH LAGU FAVORIT KAMU */}
             <p className={`${cormorantGaramond.className} text-xl font-bold tracking-wide text-[#6F8098]`}>Favorite Song</p>
-            <p className={`${nunito.className} mt-2 text-base font-semibold text-[#49596D]`}>Nothing's Gonna Hurt You Baby</p>
+            <p className={`${nunito.className} mt-2 text-base font-semibold text-[#49596D]`}>Neon moon</p>
             <span className="absolute -top-4 -left-3 text-3xl text-[#6F8098]">✦</span>
 
             {/* UBAH URL SPOTIFY KAMU DENGAN LAGU FAVORIT MU */}
