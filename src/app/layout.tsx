@@ -53,7 +53,7 @@ export default function RootLayout({
   children: React.ReactNode
 }>) {
   return (
-    <html lang="en" className={`${montserrat.variable} ${cinzel.variable} ${rubikone.variable} h-full antialiased`}>
+    <html lang="en" className={`${montserrat.variable} ${cinzel.variable} ${rubikone.variable} ${simplicity.variable} ${blackGoth.variable} ${cloisterBlack.variable} h-full antialiased`}>
       <head>
         <link rel="icon" type="image/png" href="/assets/images/favicon/favicon-96x96.png" sizes="96x96" />
         <link rel="icon" type="image/svg+xml" href="/assets/images/favicon/favicon.svg" />
