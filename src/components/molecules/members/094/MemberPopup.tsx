@@ -95,7 +95,7 @@ const MemberPopup = ({ isOpen, onClose }: MemberPopupProps) => {
     <div className="fixed inset-0 z-[100] flex items-start justify-center overflow-y-auto px-4 pt-28 pb-8 sm:pt-32 bg-black/80 backdrop-blur-md group/modal select-none">
       
       {/* File Audio BGM Fire Force */}
-      <audio ref={audioRef} src="/bgm/fire force bgm.mp3" loop className="hidden" />
+      <audio ref={audioRef} src="/asset/bgm/fire force bgm.mp3" loop className="hidden" />
 
       <style>{`
         /* --- Kumpulan Keyframes Tema Fire Force --- */
@@ -365,7 +365,7 @@ const MemberPopup = ({ isOpen, onClose }: MemberPopupProps) => {
                 <Instagram username="akdn.hpz_" />
               </div>
               <div className="hover:shadow-[0_0_15px_#ff4500] rounded-full transition-shadow">
-                <LinkedInButtonLink username="akhdan-hafiz" />
+                <LinkedInButtonLink username="akhdan-hafiz-371605379" />
               </div>
             </div>
 
@@ -388,7 +388,7 @@ const MemberPopup = ({ isOpen, onClose }: MemberPopupProps) => {
 
               {/* Spotify Embed */}
               <div className="relative z-30 ring-1 ring-[#ff4500]/30 rounded-xl overflow-hidden hover:ring-[#ff4500] transition-all">
-                <SpotifyEmbed spotifyUrl="https://open.spotify.com/track/7zAt4tdL44D3VuzsvM0N8n?si=852b598f52a04440" />
+                <SpotifyEmbed spotifyUrl="https://open.spotify.com/track/7zAt4tdL44D3VuzsvM0N8n?si=d008574149a64194" />
               </div>
             </div>
           </div>
