@@ -1,6 +1,8 @@
 'use client'
 
 import React, { useEffect } from 'react'
+import { createPortal } from 'react-dom'
+
 import Image from 'next/image'
 
 import Instagram from '@/components/atoms/button/InstagramButtonLink'
@@ -39,9 +41,10 @@ const MemberPopup = ({ isOpen, onClose }: MemberPopupProps) => {
     return null
   }
 
-  return (
+  return createPortal(
     // PADA BAGIAN INI KAMU BOLEH MENGUBAH STYLE SESUKA HATI KAMU, TAPI JANGAN UBAH STRUKTUR DAN FUNGSI DARI KODE INI AGAR FUNGSI POPUP TETAP BERJALAN DENGAN BAIK
     <div className="fixed inset-0 z-[100] flex items-start justify-center overflow-y-auto px-4 pt-28 pb-8 sm:pt-32 font-sans">
+    <div className="fixed inset-0 z-[100] flex items-start justify-center overflow-y-auto px-4">
       <button
         type="button"
         aria-label="Close member detail"
@@ -52,6 +55,7 @@ const MemberPopup = ({ isOpen, onClose }: MemberPopupProps) => {
       <div className="relative z-10 max-h-[calc(100vh-9rem)] w-full max-w-[720px] animate-[member-popup-show_300ms_ease-out] overflow-y-auto rounded-sm border-2 border-yellow-500/80 bg-gradient-to-br from-slate-900 via-blue-950 to-slate-950 p-6 text-white shadow-[0_0_30px_rgba(234,179,8,0.2)] sm:max-h-[calc(100vh-10rem)] sm:p-8">
         
         {/* MLBB Style Close Button (Red/Gold aesthetic) */}
+      <div className="border-neutral-cs-10 bg-blue-cs-40 relative z-10 max-h-[100dvh] w-full max-w-[720px] animate-[member-popup-show_200ms_ease-out] overflow-y-auto rounded-2xl border-2 p-6 text-white shadow-xl sm:p-8">
         <button
           type="button"
           aria-label="Close member detail"
@@ -113,7 +117,8 @@ const MemberPopup = ({ isOpen, onClose }: MemberPopupProps) => {
           </div>
         </div>
       </div>
-    </div>
+    </div>,
+    document.body
   )
 }
 
