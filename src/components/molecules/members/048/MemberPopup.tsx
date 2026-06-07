@@ -43,23 +43,23 @@ const MemberPopup = ({ isOpen, onClose }: MemberPopupProps) => {
   return (
     // PADA BAGIAN INI KAMU BOLEH MENGUBAH STYLE SESUKA HATI KAMU, TAPI JANGAN UBAH STRUKTUR DAN FUNGSI DARI KODE INI AGAR FUNGSI POPUP TETAP BERJALAN DENGAN BAIK
     <div className="fixed inset-0 z-[100] flex items-start justify-center overflow-y-auto px-4 pt-28 pb-8 sm:pt-32">
-  <button
-    type="button"
-    aria-label="Close member detail"
-    onClick={onClose}
-    className="absolute inset-0 bg-black/70 backdrop-blur-md transition-opacity duration-300 animate-in fade-in duration-300"
-  />
-  <div className="border-blue-cs-40/40 bg-gradient-to-b from-blue-cs-40 to-blue-cs-30 relative z-10 max-h-[calc(100vh-9rem)] w-full max-w-[720px] overflow-y-auto rounded-3xl border-2 p-6 text-white shadow-2xl sm:max-h-[calc(100vh-10rem)] sm:p-8 before:pointer-events-none before:absolute before:inset-0 before:rounded-3xl before:bg-gradient-to-t before:from-blue-cs-40/20 before:to-transparent animate-in fade-in zoom-in-95 duration-300 ease-out">
-    <button
-      type="button"
-      aria-label="Close member detail"
-      onClick={onClose}
-      className="border-white/30 hover:border-white/60 hover:bg-white/10 absolute top-4 right-4 flex h-10 w-10 items-center justify-center rounded-full border-2 text-xl leading-none font-bold transition-all duration-200 hover:scale-110"
-    >
-      ✕
-    </button>
-
-        <div className="border-neutral-cs-10/40 mb-5 overflow-hidden rounded-2xl border">
+      <button
+        type="button"
+        aria-label="Close member detail"
+        onClick={onClose}
+        className="popup-backdrop absolute inset-0 bg-black/70 backdrop-blur-md transition-opacity duration-300"
+      />
+      <div className="popup-container relative z-10 max-h-[calc(100vh-9rem)] w-full max-w-[720px] overflow-y-auto rounded-3xl border-4 border-black bg-white p-6 text-black shadow-2xl sm:max-h-[calc(100vh-10rem)] sm:p-8">
+        <button
+          type="button"
+          aria-label="Close member detail"
+          onClick={onClose}
+          className="close-button border-black/80 hover:bg-black/5 absolute top-4 right-4 flex h-10 w-10 items-center justify-center rounded-full border-2 font-bold transition-all duration-200"
+        >
+          ✕
+        </button>
+ 
+        <div className="profile-image-container border-4 border-black mb-5 overflow-hidden rounded-2xl">
           <Image src={ProfileImage} alt="Profile Image" className="h-120 w-full object-cover object-center" />
         </div>
 
