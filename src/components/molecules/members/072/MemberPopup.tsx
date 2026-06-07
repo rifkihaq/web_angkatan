@@ -1,6 +1,9 @@
 'use client'
 
 import React, { useEffect, useRef } from 'react'
+import React, { useEffect } from 'react'
+import { createPortal } from 'react-dom'
+
 import Image from 'next/image'
 import Instagram from '@/components/atoms/button/InstagramButtonLink'
 import LinkedInButtonLink from '@/components/atoms/button/LinkedInButtonLink'
@@ -159,6 +162,9 @@ const MemberPopup = ({ isOpen, onClose }: MemberPopupProps) => {
         <ParticleEffect /> 
       </div>
 
+  return createPortal(
+    // PADA BAGIAN INI KAMU BOLEH MENGUBAH STYLE SESUKA HATI KAMU, TAPI JANGAN UBAH STRUKTUR DAN FUNGSI DARI KODE INI AGAR FUNGSI POPUP TETAP BERJALAN DENGAN BAIK
+    <div className="fixed inset-0 z-[100] flex items-start justify-center overflow-y-auto px-4">
       <button
         type="button"
         aria-label="Close member detail"
@@ -166,7 +172,7 @@ const MemberPopup = ({ isOpen, onClose }: MemberPopupProps) => {
         className="fixed inset-0 z-0"
       />
 
-      <div className="border-neutral-cs-10/50 bg-black/60 relative z-10 max-h-[calc(100vh-9rem)] w-full max-w-[720px] animate-[member-popup-show_400ms_cubic-bezier(0.175,0.885,0.32,1.275)] overflow-y-auto rounded-2xl border backdrop-blur-md p-6 text-white shadow-[0_0_50px_rgba(0,0,0,0.8)] sm:max-h-[calc(100vh-10rem)] sm:p-8">
+      <div className="border-neutral-cs-10 bg-black relative z-10 max-h-[calc(100vh-9rem)] w-full max-w-[720px] animate-[member-popup-show_200ms_ease-out] overflow-y-auto rounded-2xl border-2 p-6 text-white shadow-xl sm:max-h-[calc(100vh-10rem)] sm:p-8">
         <button
           type="button"
           aria-label="Close member detail"
@@ -263,7 +269,8 @@ const MemberPopup = ({ isOpen, onClose }: MemberPopupProps) => {
           <div className="absolute bottom-0 right-0 w-32 h-32 bg-blue-cs-50 rounded-full blur-3xl opacity-20 pointer-events-none" />
         </div>
       </div>
-    </div>
+    </div>,
+    document.body
   )
 }
 
