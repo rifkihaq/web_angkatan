@@ -1024,8 +1024,14 @@ const MemberPopup = ({ isOpen, onClose }: MemberPopupProps) => {
             </div>
           </div>
         </div>
+<<<<<<< HEAD
       )}
     </div>
+=======
+      </div>
+    </div>,
+    document.body
+>>>>>>> d5b846e884c03734d85e56dbd2efa02b188d44ce
   )
 }
 
