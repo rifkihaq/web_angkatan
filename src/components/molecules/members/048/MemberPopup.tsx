@@ -47,9 +47,9 @@ const MemberPopup = ({ isOpen, onClose }: MemberPopupProps) => {
     type="button"
     aria-label="Close member detail"
     onClick={onClose}
-    className="absolute inset-0 bg-black/70 backdrop-blur-md transition-opacity duration-300"
+    className="absolute inset-0 bg-black/70 backdrop-blur-md transition-opacity duration-300 animate-in fade-in duration-300"
   />
-  <div className="border-blue-cs-40/40 bg-gradient-to-b from-blue-cs-40 to-blue-cs-30 relative z-10 max-h-[calc(100vh-9rem)] w-full max-w-[720px] animate-[member-popup-show_200ms_ease-out] overflow-y-auto rounded-3xl border-2 p-6 text-white shadow-2xl sm:max-h-[calc(100vh-10rem)] sm:p-8 before:pointer-events-none before:absolute before:inset-0 before:rounded-3xl before:bg-gradient-to-t before:from-blue-cs-40/20 before:to-transparent">
+  <div className="border-blue-cs-40/40 bg-gradient-to-b from-blue-cs-40 to-blue-cs-30 relative z-10 max-h-[calc(100vh-9rem)] w-full max-w-[720px] overflow-y-auto rounded-3xl border-2 p-6 text-white shadow-2xl sm:max-h-[calc(100vh-10rem)] sm:p-8 before:pointer-events-none before:absolute before:inset-0 before:rounded-3xl before:bg-gradient-to-t before:from-blue-cs-40/20 before:to-transparent animate-in fade-in zoom-in-95 duration-300 ease-out">
     <button
       type="button"
       aria-label="Close member detail"
