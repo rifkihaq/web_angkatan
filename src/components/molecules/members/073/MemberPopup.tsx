@@ -18,7 +18,6 @@ type MemberPopupProps = {
 
 type Stage = 'envelope-front' | 'envelope-flip' | 'envelope-open' | 'poem' | 'profile'
 
-// Floating emoji component — floats WITHOUT covering text
 const FloatingEmoji = ({
   emoji,
   count = 6,
@@ -53,7 +52,6 @@ const FloatingEmoji = ({
   )
 }
 
-// Falling leaves for poem box
 const FallingLeaves = () => {
   return (
     <div
@@ -61,16 +59,16 @@ const FallingLeaves = () => {
       style={{ zIndex: 0 }}
       aria-hidden="true"
     >
-      {Array.from({ length: 10 }).map((_, i) => (
+      {Array.from({ length: 18 }).map((_, i) => (
         <span
           key={i}
           className="absolute select-none"
           style={{
-            left: `${5 + (i * 9) % 90}%`,
-            top: `-1.5rem`,
-            fontSize: `${0.9 + (i % 3) * 0.3}rem`,
-            opacity: 0.4,
-            animation: `leafFall ${5 + (i * 0.7) % 4}s ease-in ${(i * 0.6) % 5}s infinite`,
+            left: `${3 + (i * 11) % 92}%`,
+            top: `-2rem`,
+            fontSize: `${0.8 + (i % 4) * 0.25}rem`,
+            opacity: 0.35 + (i % 3) * 0.1,
+            animation: `leafFall ${6 + (i * 0.8) % 6}s ease-in-out ${(i * 0.5) % 7}s infinite`,
           }}
         >
           🍂
@@ -116,7 +114,6 @@ Wahai Tuan yang tak pernah tau.`
 const SPOTIFY_EMBED_URL =
   'https://open.spotify.com/track/3AAAGS7iM1ekDywqdYMJG2?si=pDg9SaHgTNqdlLN-AmweuQ'
 
-// Tiny autoplay iframe helper — hidden, just for audio
 const HiddenSpotifyPlayer = ({ play }: { play: boolean }) => {
   if (!play) return null
   return (
@@ -137,7 +134,6 @@ const MemberPopup = ({ isOpen, onClose }: MemberPopupProps) => {
   const [isOpening, setIsOpening] = useState(false)
   const [musicPlaying, setMusicPlaying] = useState(false)
 
-  // Reset state when popup opens
   useEffect(() => {
     if (isOpen) {
       setStage('envelope-front')
@@ -166,13 +162,11 @@ const MemberPopup = ({ isOpen, onClose }: MemberPopupProps) => {
   }
 
   const handleOk = () => {
-    // Flip envelope to back
     setIsFlipping(true)
     setStage('envelope-flip')
     setTimeout(() => {
       setStage('envelope-open')
       setIsOpening(true)
-      // After flap opens, go to poem
       setTimeout(() => {
         setMusicPlaying(true)
         setStage('poem')
@@ -184,7 +178,6 @@ const MemberPopup = ({ isOpen, onClose }: MemberPopupProps) => {
 
   return createPortal(
     <>
-      {/* Hidden spotify autoplay */}
       <HiddenSpotifyPlayer play={musicPlaying} />
 
       <style>{`
@@ -195,11 +188,12 @@ const MemberPopup = ({ isOpen, onClose }: MemberPopupProps) => {
           100% { transform: translateY(calc(100% + 3rem)) rotate(20deg); opacity: 0; }
         }
         @keyframes leafFall {
-          0%   { transform: translateY(-1.5rem) rotate(-10deg) translateX(0); opacity: 0; }
-          10%  { opacity: 0.45; }
-          50%  { transform: translateY(50%) rotate(15deg) translateX(12px); }
-          90%  { opacity: 0.3; }
-          100% { transform: translateY(105%) rotate(-5deg) translateX(-8px); opacity: 0; }
+          0%   { transform: translateY(-2rem) rotate(-15deg) translateX(0px); opacity: 0; }
+          8%   { opacity: 0.45; }
+          30%  { transform: translateY(30vh) rotate(20deg) translateX(15px); }
+          55%  { transform: translateY(55vh) rotate(-10deg) translateX(-10px); }
+          80%  { transform: translateY(80vh) rotate(25deg) translateX(8px); opacity: 0.3; }
+          100% { transform: translateY(110vh) rotate(-5deg) translateX(-5px); opacity: 0; }
         }
         @keyframes envelopeFlipIn {
           0%   { transform: rotateY(0deg); }
@@ -214,8 +208,9 @@ const MemberPopup = ({ isOpen, onClose }: MemberPopupProps) => {
           100% { opacity: 1; transform: translateY(0); }
         }
         @keyframes sunsetGlow {
-          0%, 100% { background-position: 0% 50%; }
-          50%       { background-position: 100% 50%; }
+          0%   { background-position: 0% 0%; }
+          50%  { background-position: 100% 100%; }
+          100% { background-position: 0% 0%; }
         }
         @keyframes floatBob {
           0%, 100% { transform: translateY(0px) rotate(-5deg); }
@@ -248,9 +243,20 @@ const MemberPopup = ({ isOpen, onClose }: MemberPopupProps) => {
           transform: rotateX(-160deg);
         }
         .poem-box {
-          background: linear-gradient(135deg, #ff9a5c 0%, #ff6b35 25%, #e85d04 50%, #d4533b 75%, #c94040 100%);
-          background-size: 300% 300%;
-          animation: sunsetGlow 8s ease infinite;
+          background: linear-gradient(
+            170deg,
+            #ffd4a3 0%,
+            #ffb347 8%,
+            #ff8c42 20%,
+            #ff6b35 35%,
+            #e8502a 50%,
+            #c94020 65%,
+            #a83218 78%,
+            #7c1d2e 90%,
+            #4a0e2e 100%
+          );
+          background-size: 200% 200%;
+          animation: sunsetGlow 10s ease infinite;
         }
         .profile-animate {
           animation: fadeSlideUp 0.4s ease-out both;
@@ -274,7 +280,6 @@ const MemberPopup = ({ isOpen, onClose }: MemberPopupProps) => {
 
                 {/* FRONT FACE */}
                 <div className="envelope-face rounded-2xl bg-white border-2 border-pink-200 shadow-2xl flex flex-col items-center justify-center gap-4 p-6">
-                  {/* Envelope decorative lines */}
                   <div className="absolute inset-0 rounded-2xl overflow-hidden opacity-10">
                     <div className="absolute top-0 left-0 w-0 h-0 border-l-[6rem] border-l-transparent border-t-[3rem] border-t-pink-300 sm:border-l-[8rem] sm:border-t-[4rem]" />
                     <div className="absolute top-0 right-0 w-0 h-0 border-r-[6rem] border-r-transparent border-t-[3rem] border-t-pink-300 sm:border-r-[8rem] sm:border-t-[4rem]" />
@@ -294,30 +299,24 @@ const MemberPopup = ({ isOpen, onClose }: MemberPopupProps) => {
 
                 {/* BACK FACE */}
                 <div className="envelope-face envelope-back rounded-2xl bg-[#fde8f0] border-2 border-pink-200 shadow-2xl overflow-hidden flex flex-col">
-                  {/* Envelope body */}
                   <div className="flex-1 flex items-center justify-center relative">
-                    {/* diagonal lines texture */}
                     <svg className="absolute inset-0 w-full h-full opacity-5" xmlns="http://www.w3.org/2000/svg">
                       <pattern id="diag" x="0" y="0" width="10" height="10" patternUnits="userSpaceOnUse">
                         <line x1="0" y1="10" x2="10" y2="0" stroke="#b06080" strokeWidth="1"/>
                       </pattern>
                       <rect width="100%" height="100%" fill="url(#diag)"/>
                     </svg>
-                    {/* Letter inside peeking */}
                     <div className="w-3/4 h-2/3 bg-white/70 rounded-lg shadow-inner flex items-center justify-center">
                       <span className="text-2xl">📜</span>
                     </div>
                   </div>
-                  {/* Envelope flap (top triangle) */}
                   <div
                     className={`flap absolute top-0 left-0 right-0 z-10 ${stage === 'envelope-open' ? 'flap-open' : ''}`}
                     style={{ height: '50%', transformOrigin: 'top center' }}
                   >
-                    {/* Triangle flap shape */}
                     <svg viewBox="0 0 100 50" className="w-full h-full" preserveAspectRatio="none">
                       <polygon points="0,0 100,0 50,50" fill="#fad4e5" stroke="#f8b4d0" strokeWidth="0.5"/>
                     </svg>
-                    {/* Maple leaf seal */}
                     <div className="absolute bottom-2 left-1/2 -translate-x-1/2 text-xl sm:text-2xl">
                       🍁
                     </div>
@@ -334,41 +333,38 @@ const MemberPopup = ({ isOpen, onClose }: MemberPopupProps) => {
         {/* ────── POEM STAGE ────── */}
         {stage === 'poem' && (
           <div
-            className="relative z-10 w-full max-w-[680px] rounded-2xl shadow-2xl overflow-hidden animate-[fadeSlideUp_0.5s_ease-out]"
+            className="relative z-10 w-full max-w-[680px] rounded-2xl shadow-2xl overflow-hidden"
             style={{ animation: 'fadeSlideUp 0.5s ease-out both' }}
           >
-            <div className="poem-box relative p-6 sm:p-8">
-              {/* Falling leaves — behind content, z-0 */}
+            <div className="poem-box relative p-6 sm:p-8 min-h-screen">
+              {/* Falling leaves — full height, behind everything */}
               <FallingLeaves />
 
               {/* Content — z-10 so leaves go behind */}
               <div className="relative z-10">
-                {/* Poem title */}
                 <h2
                   className="text-xl sm:text-2xl font-black leading-snug mb-5"
                   style={{
                     color: '#fff8ee',
-                    textShadow: '0 2px 12px rgba(0,0,0,0.35)',
+                    textShadow: '0 2px 12px rgba(0,0,0,0.4)',
                     fontFamily: '"Georgia", "Times New Roman", serif',
                   }}
                 >
                   {poemTitle}
                 </h2>
 
-                {/* Poem body */}
                 <div
                   className="text-sm sm:text-base leading-relaxed whitespace-pre-line"
                   style={{
                     color: '#ffffff',
                     fontFamily: '"Georgia", "Times New Roman", serif',
-                    textShadow: '0 1px 6px rgba(0,0,0,0.25)',
+                    textShadow: '0 1px 8px rgba(0,0,0,0.3)',
                   }}
                 >
                   {poemBody}
                 </div>
 
-                {/* Footer: spotify hint + next button */}
-                <div className="mt-6 flex items-center justify-between gap-4 flex-wrap">
+                <div className="mt-8 flex items-center justify-between gap-4 flex-wrap">
                   <p className="text-xs text-orange-100 italic opacity-80">
                     🎵 Akad - Payung Teduh sedang mengalun~
                   </p>
@@ -389,10 +385,8 @@ const MemberPopup = ({ isOpen, onClose }: MemberPopupProps) => {
           <div
             className="relative z-10 max-h-[calc(100vh-4rem)] w-full max-w-[720px] overflow-y-auto rounded-2xl border-2 border-pink-200 bg-[#fde8f0] p-6 text-[#7c3a5a] shadow-2xl ring-1 ring-pink-100 sm:p-8 profile-animate"
           >
-            {/* Hidden spotify still playing */}
             <HiddenSpotifyPlayer play={musicPlaying} />
 
-            {/* Close button — stops music */}
             <button
               type="button"
               aria-label="Close member detail"
@@ -402,7 +396,6 @@ const MemberPopup = ({ isOpen, onClose }: MemberPopupProps) => {
               ✕
             </button>
 
-            {/* Profile photo */}
             <div className="mb-5 overflow-hidden rounded-2xl border border-pink-200">
               <Image
                 src={ProfileImage}
@@ -422,17 +415,17 @@ const MemberPopup = ({ isOpen, onClose }: MemberPopupProps) => {
             </div>
 
             <div className="mt-6 grid gap-4 text-sm font-semibold sm:grid-cols-2">
-              {/* Hobi card — floating 📜 and 𝄞 */}
+              {/* Hobi card */}
               <div className="relative rounded-xl border border-pink-200 bg-[#fad4e5] p-4 overflow-hidden">
                 <FloatingEmoji emoji="📜" count={3} style={{ opacity: 1 }} />
                 <FloatingEmoji emoji="𝄞" count={3} style={{ opacity: 1 }} />
                 <div className="relative z-10">
                   <p className="text-[#c478a0] text-xs tracking-widest uppercase">Hobi</p>
-                  <p className="mt-2 text-[#7c3a5a]">Bikin puisi, nggambar, dengerin lagu Yowis Ben</p>
+                  <p className="mt-2 text-[#7c3a5a]">Bikin puisi, nggambar, dengerin lagu, dengerin orang nggitar</p>
                 </div>
               </div>
 
-              {/* Fun Fact card — floating ᶻ 𝘇 𐰁 */}
+              {/* Fun Fact card */}
               <div className="relative rounded-xl border border-pink-200 bg-[#f9cfe2] p-4 hover:border-pink-300 hover:bg-[#f7c4db] transition-colors overflow-hidden">
                 <FloatingEmoji emoji="ᶻ" count={2} />
                 <FloatingEmoji emoji="𝘇" count={2} />
