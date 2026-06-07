@@ -1,6 +1,7 @@
 'use client'
 
-import React, { useCallback, useEffect, useState } from 'react'
+import React, { useEffect, useState } from 'react'
+import { createPortal } from 'react-dom'
 
 import Image from 'next/image'
 
@@ -26,15 +27,6 @@ const MemberPopup = ({ isOpen, onClose }: MemberPopupProps) => {
   const [isAuthorizing, setIsAuthorizing] = useState(false)
   const [terminalText, setTerminalText] = useState('')
 
-  const closePopup = useCallback(() => {
-    setAccessCode('')
-    setError('')
-    setTerminalText('')
-    setIsAuthorizing(false)
-    setAccessGranted(false)
-    onClose()
-  }, [onClose])
-
   useEffect(() => {
     if (!isOpen) {
       return
@@ -56,142 +48,175 @@ const MemberPopup = ({ isOpen, onClose }: MemberPopupProps) => {
   }, [isOpen, closePopup])
 
   const handleAuthorize = async () => {
-  if (accessCode !== '057') {
-    setError('ACCESS DENIED')
-    return
+    if (accessCode !== '057') {
+      setError('ACCESS DENIED')
+      return
+    }
+
+    setError('')
+    setIsAuthorizing(true)
+
+    const lines = [
+      'CHECKING AUTHORIZATION...',
+      'SYNCHRONIZING PILOT DATA...',
+      'VERIFYING NERV DATABASE...',
+      'PILOT IDENTITY CONFIRMED',
+      'NERV AUTHORIZATION ACCEPTED',
+    ]
+
+    setTerminalText('')
+
+    for (const line of lines) {
+      await new Promise((resolve) => setTimeout(resolve, 700))
+
+      setTerminalText((prev) =>
+        prev ? `${prev}\n${line}` : line
+      )
+    }
+
+    setTimeout(() => {
+      setAccessGranted(true)
+      setIsAuthorizing(false)
+    }, 1000)
   }
-
-  setError('')
-  setIsAuthorizing(true)
-
-  const lines = [
-    'CHECKING AUTHORIZATION...',
-    'SYNCHRONIZING PILOT DATA...',
-    'VERIFYING NERV DATABASE...',
-    'PILOT IDENTITY CONFIRMED',
-    'NERV AUTHORIZATION ACCEPTED',
-  ]
-
-  setTerminalText('')
-
-  for (const line of lines) {
-    await new Promise((resolve) => setTimeout(resolve, 700))
-
-    setTerminalText((prev) =>
-      prev ? `${prev}\n${line}` : line
-    )
-  }
-
-  setTimeout(() => {
-    setAccessGranted(true)
-    setIsAuthorizing(false)
-  }, 1000)
-}
 
   if (!isOpen) {
     return null
   }
 
   if (!accessGranted) {
-  return createPortal(
-    <div className="fixed inset-0 z-[9999] flex items-center justify-center px-4">
-      <div className="absolute inset-0 z-0" 
-      style={{ 
-        backgroundImage: `url(${EvaBackground.src})`, 
-        backgroundSize: 'cover', 
-        backgroundPosition: 'center', 
-        backgroundRepeat: 'no-repeat',}}/>
-      {/*overlay*/}
-      <div className="absolute inset-0 z-0 bg-black/85" />
-      {/* Scanline Effect */}
-      <div
-        className="pointer-events-none absolute inset-0 opacity-10"
-        style={{
-          background:
-            'repeating-linear-gradient(0deg, transparent, transparent 2px, rgba(0,0,0,0.8) 3px, rgba(0,0,0,0.8) 4px)',
-        }}
-      />
-      <div
-        className="absolute inset-0 z-0 opacity-20"
-        style={{
-          backgroundImage:
-            'linear-gradient(red 1px, transparent 1px), linear-gradient(90deg, red 1px, transparent 1px)',
-          backgroundSize: '40px 40px',
-        }}
-      />
-      {/* CLASSIFIED */}
-      <div className="absolute top-6 left-6 z-10 text-red-600">
-        <p className="text-xs tracking-[0.5em]">
-          NERV DATABASE
-        </p>
+    return (
+      <div className="fixed inset-0 z-[9999] flex items-center justify-center px-4">
+        <style>{`
+          @keyframes scanMove {
+            0%   { top: -80px; }
+            100% { top: 100%; }
+          }
+        `}</style>
+        <div
+          className="absolute inset-0 z-0"
+          style={{
+            backgroundImage: `url(${EvaBackground.src})`,
+            backgroundSize: 'cover',
+            backgroundPosition: 'center',
+            backgroundRepeat: 'no-repeat',
+          }}
+        />
+        {/* Overlay */}
+        <div className="absolute inset-0 z-0 bg-black/85" />
 
-        <p className="text-3xl font-black">
-          CLASSIFIED
-        </p>
-      </div>
-      <div className="relative z-20 w-full max-w-xl rounded-2xl border-2 border-red-600 bg-black p-8 text-white shadow-2xl">
-        <div className="mb-6">
-          <p className="text-xs tracking-[0.5em] text-red-500">
-            NERV SECURITY SYSTEM
-          </p>
-
-          <h2 className="mt-3 text-3xl font-black text-red-500">
-            AUTHORIZATION REQUIRED
-          </h2>
-
-          <p className="mt-2 text-sm text-gray-400">
-            Enter Pilot Access Code
-          </p>
+        {/* Moving Scanline */}
+        <div className="absolute inset-0 overflow-hidden pointer-events-none">
+          <div
+            className="absolute left-0 w-full h-20"
+            style={{
+              background:
+                'linear-gradient(to bottom, transparent, rgba(255,0,0,0.15), transparent)',
+              animation: 'scanMove 4s linear infinite',
+            }}
+          />
         </div>
 
-        {!isAuthorizing ? (
-          <>
-            <input
-              value={accessCode}
-              onChange={(e) => setAccessCode(e.target.value)}
-              placeholder="- - -"
-              className="w-full rounded-lg border border-red-600 bg-black p-3 text-center text-lg tracking-[0.3em] outline-none"
-            />
+        {/* Pulse Border Glow */}
+        <div
+          className="absolute inset-0 pointer-events-none animate-pulse"
+          style={{
+            boxShadow: 'inset 0 0 120px rgba(255,0,0,1)',
+          }}
+        />
 
-            {error && (
-              <p className="mt-3 font-semibold text-red-500">
-                {error}
-              </p>
-            )}
+        {/* Scanline Effect */}
+        <div
+          className="pointer-events-none absolute inset-0 opacity-10"
+          style={{
+            background:
+              'repeating-linear-gradient(0deg, transparent, transparent 2px, rgba(0,0,0,0.8) 3px, rgba(0,0,0,0.8) 4px)',
+          }}
+        />
 
-            <button
-              onClick={handleAuthorize}
-              className="mt-5 w-full rounded-lg bg-red-600 py-3 font-bold transition hover:bg-red-700"
-            >
-              AUTHORIZE
-            </button>
+        {/* Grid */}
+        <div
+          className="absolute inset-0 z-0 opacity-20"
+          style={{
+            backgroundImage:
+              'linear-gradient(red 1px, transparent 1px), linear-gradient(90deg, red 1px, transparent 1px)',
+            backgroundSize: '40px 40px',
+          }}
+        />
 
-            <button
-              onClick={closePopup}
-              className="mt-3 w-full rounded-lg border border-gray-600 py-3"
-            >
-              CANCEL
-            </button>
-          </>
-        ) : (
-          <div className="min-h-[220px] rounded-lg border border-red-600 bg-black p-4 font-mono text-green-400 whitespace-pre-line">
-            {terminalText}
-            <span className="animate-pulse">█</span>
+        {/* CLASSIFIED */}
+        <div className="absolute top-6 left-6 z-10 text-red-600">
+          <p className="text-xs tracking-[0.5em]">NERV DATABASE</p>
+          <p className="text-3xl font-black">CLASSIFIED</p>
+        </div>
+
+        <div className="relative z-20 w-full max-w-xl rounded-2xl border-2 border-red-600 bg-black p-8 text-white shadow-2xl">
+          <div className="mb-6">
+            <p className="text-xs tracking-[0.5em] text-red-500">
+              NERV SECURITY SYSTEM
+            </p>
+            <h2 className="mt-3 text-3xl font-black text-red-500">
+              AUTHORIZATION REQUIRED
+            </h2>
+            <p className="mt-2 text-sm text-gray-400">
+              Enter Pilot Access Code
+            </p>
           </div>
-        )}
+
+          {!isAuthorizing ? (
+            <>
+              <input
+                value={accessCode}
+                onChange={(e) => setAccessCode(e.target.value)}
+                placeholder="- - -"
+                className="w-full rounded-lg border border-red-600 bg-black p-3 text-center text-lg tracking-[0.3em] outline-none"
+              />
+
+              {error && (
+                <p className="mt-3 font-semibold text-red-500">{error}</p>
+              )}
+
+              <button
+                onClick={handleAuthorize}
+                className="mt-5 w-full rounded-lg bg-red-600 py-3 font-bold transition hover:bg-red-700"
+              >
+                AUTHORIZE
+              </button>
+
+              <button
+                onClick={onClose}
+                className="mt-3 w-full rounded-lg border border-gray-600 py-3"
+              >
+                CANCEL
+              </button>
+            </>
+          ) : (
+            <div className="min-h-[220px] rounded-lg border border-red-600 bg-black p-4 font-mono text-green-400 whitespace-pre-line">
+              {terminalText}
+              <span className="animate-pulse">█</span>
+            </div>
+          )}
+        </div>
       </div>
-    </div>,
-    document.body
-  )
-}
-
-
+    )
+  }
 
   return createPortal(
     // PADA BAGIAN INI KAMU BOLEH MENGUBAH STYLE SESUKA HATI KAMU, TAPI JANGAN UBAH STRUKTUR DAN FUNGSI DARI KODE INI AGAR FUNGSI POPUP TETAP BERJALAN DENGAN BAIK
-    <div className="fixed inset-0 z-[9999] flex items-start justify-center overflow-hidden px-4">
+    <div
+      className="fixed inset-0 z-[9999] flex items-center justify-center overflow-y-auto p-4"
+      onClick={onClose}
+    >
+      <style>{`
+        @keyframes scanMove {
+          0%   { top: -80px; }
+          100% { top: 100%; }
+        }
+      `}</style>
+
       {/* Full Screen EVA Overlay */}
       <div className="fixed inset-0 z-[9999] bg-black" />
+
       {/* EVA Background */}
       <div
         className="fixed inset-0 z-[10000]"
@@ -205,6 +230,30 @@ const MemberPopup = ({ isOpen, onClose }: MemberPopupProps) => {
 
       {/* Overlay */}
       <div className="fixed inset-0 z-[10001] bg-black/85" />
+
+      {/* Pulse Border Glow */}
+      <div
+        className="fixed inset-0 z-[10001] pointer-events-none animate-pulse"
+        style={{
+          boxShadow: 'inset 0 0 120px rgba(255,0,0,1)',
+        }}
+      />
+
+      {/* Red Scanline Full Screen */}
+      <div className="pointer-events-none fixed inset-0 z-[10001] overflow-hidden">
+        <div
+          style={{
+            position: 'absolute',
+            left: 0,
+            width: '100%',
+            height: '64px',
+            background:
+              'linear-gradient(to bottom, transparent, rgba(255,0,0,0.3), transparent)',
+            animation: 'scanMove 3s linear infinite',
+          }}
+        />
+      </div>
+
       <button
         type="button"
         aria-label="Close member detail"
@@ -212,19 +261,31 @@ const MemberPopup = ({ isOpen, onClose }: MemberPopupProps) => {
         className="fixed inset-0 bg-black/90 z-[9999]"
       />
 
-      <div className=" relative z-[10002] h-[100dvh] max-h-[100dvh] w-full max-w-[720px] overflow-y-auto overscroll-contain rounded-2xl border-2 border-red-600 text-white shadow-xl
-          "style={{
-            backgroundColor: '#0a0a0a',
-            boxShadow:
-            'inset 8px 0 0 #ff0000, inset -8px 0 0 #ff0000',
-          }}
-        >
-        {/*
-        <div className="absolute top-0 left-0 h-1 w-full bg-red-600" />
-        <div className="absolute bottom-0 left-0 h-1 w-full bg-red-600" />  */}
-
+      <div
+        className="relative z-[10002] max-h-[calc(100vh-9rem)] w-full max-w-[720px] overflow-y-auto rounded-2xl border-2 border-red-600 text-white shadow-xl sm:max-h-[calc(100vh-10rem)]"
+        style={{
+          backgroundColor: '#0a0a0a',
+          boxShadow: 'inset 8px 0 0 #ff0000, inset -8px 0 0 #ff0000',
+        }}
+      >
         {/* Dark Overlay */}
         <div className="absolute inset-0 rounded-2xl bg-black/60" />
+
+        {/* EVA Scan Line inside card */}
+        <div className="absolute inset-0 overflow-hidden pointer-events-none">
+          <div
+            className="absolute left-0 w-full h-20"
+            style={{
+              background:
+                'linear-gradient(to bottom, transparent, rgba(255,0,0,0.15), transparent)',
+              animation: 'scanMove 4s linear infinite',
+            }}
+          />
+        </div>
+
+        <div className="absolute inset-0 flex items-center justify-center pointer-events-none">
+          <span className="text-[180px] font-black text-red-600/5">NERV</span>
+        </div>
 
         {/* Content */}
         <div className="relative z-[101] p-6 sm:p-8">
@@ -238,7 +299,6 @@ const MemberPopup = ({ isOpen, onClose }: MemberPopupProps) => {
           </button>
 
           <div className="group relative mb-5 overflow-hidden rounded-2xl border border-red-600/50">
-
             {/* COVER EVA */}
             <Image
               src={EvaCover}
@@ -298,9 +358,7 @@ const MemberPopup = ({ isOpen, onClose }: MemberPopupProps) => {
               <p className="text-neutral-cs-10/60 text-xs tracking-wide uppercase">
                 Hobi
               </p>
-              <p className="mt-2">
-                nge game sama sepeda aja deh
-              </p>
+              <p className="mt-2">nge game sama sepeda aja deh</p>
             </div>
 
             <div className="border-red-700/40 bg-black rounded-xl border p-4">
@@ -320,9 +378,7 @@ const MemberPopup = ({ isOpen, onClose }: MemberPopupProps) => {
               Lagu Favorit
             </p>
 
-            <p className="my-2 text-sm font-semibold">
-              残酷な天使のテーゼ
-            </p>
+            <p className="my-2 text-sm font-semibold">残酷な天使のテーゼ</p>
 
             {/* UBAH URL SPOTIFY KAMU DENGAN LAGU FAVORIT MU */}
             <SpotifyEmbed spotifyUrl="https://open.spotify.com/track/23phSRwoMy48rwFpmuAP8q?si=c795c4c5f2ca48e0" />
