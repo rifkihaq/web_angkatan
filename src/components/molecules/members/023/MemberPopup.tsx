@@ -47,7 +47,7 @@ const MemberPopup = ({ isOpen, onClose }: MemberPopupProps) => {
     // PADA BAGIAN INI KAMU BOLEH MENGUBAH STYLE SESUKA HATI KAMU, TAPI JANGAN UBAH STRUKTUR DAN FUNGSI DARI KODE INI AGAR FUNGSI POPUP TETAP BERJALAN DENGAN BAIK
 
   
-  <div className="fixed inset-0 z-[100] flex items-start justify-center overflow-y-auto px-4 pt-16 pb-8 sm:pt-20">
+  <div className="fixed inset-0 z-[100] flex items-start justify-center overflow-y-auto px-4">
     <button
       type="button"
       aria-label="Close member detail"
@@ -78,7 +78,7 @@ const MemberPopup = ({ isOpen, onClose }: MemberPopupProps) => {
     <div
       className="
         relative z-10
-        max-h-[calc(100vh-4rem)]
+        max-h-[100dvh]
         w-full
         max-w-[920px]
         overflow-y-auto
@@ -221,7 +221,8 @@ const MemberPopup = ({ isOpen, onClose }: MemberPopupProps) => {
         <SpotifyEmbed spotifyUrl="https://open.spotify.com/track/09DR0sHnQUhHOiSNttc1mv?si=2e7fb75e5fe94ef6" />
       </div>
     </div>
-  </div>
+  </div>,
+  document.body
 )
 }
 
