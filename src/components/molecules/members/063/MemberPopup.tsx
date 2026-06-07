@@ -563,7 +563,7 @@ const CastleBackground = memo(({ animated = false }: { animated?: boolean }) => 
       className="absolute inset-0 bg-cover grayscale-[26%] sepia-[16%]"
       style={{
         backgroundImage: `url(${CastleImage.src})`,
-        backgroundPosition: '56% center',
+        backgroundPosition: 'center center',
         animation: pulseAnimation,
       }}
     />
@@ -610,7 +610,7 @@ const IntroPhase = memo(({ onNext }: { onNext: () => void }) => {
         className="absolute inset-0 bg-cover opacity-[0.5] grayscale-[24%] sepia-[16%] saturate-[0.82]"
         style={{
           backgroundImage: `url(${CastleImage.src})`,
-          backgroundPosition: '56% center',
+          backgroundPosition: 'center center',
         }}
       />
 
@@ -692,7 +692,7 @@ const ChantPhase = memo(() => (
       className="absolute inset-0 bg-cover opacity-[0.34]"
       style={{
         backgroundImage: `url(${CastleImage.src})`,
-        backgroundPosition: '56% center',
+        backgroundPosition: 'center center',
         animation: 'castle-tremor 1.25s ease-in-out infinite',
       }}
     />
