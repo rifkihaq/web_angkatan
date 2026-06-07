@@ -12,7 +12,7 @@ import Instagram from '@/components/atoms/button/InstagramButtonLink'
 import LinkedInButtonLink from '@/components/atoms/button/LinkedInButtonLink'
 import SpotifyEmbed from '@/components/molecules/SpotifyEmbed'
 
-import ProfileImage from './image.jpg'
+import ProfileImage from './imag3.jpg'
 
 type MemberPopupProps = {
   isOpen: boolean
