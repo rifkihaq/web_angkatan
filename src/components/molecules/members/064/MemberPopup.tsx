@@ -247,6 +247,10 @@ const MemberPopup = ({ isOpen, onClose }: MemberPopupProps) => {
                 <p className="text-xs font-bold tracking-widest text-white/50 uppercase mb-3">Lagu Favorit</p>
                 <p className="mb-4 text-base font-semibold text-white/90">End of Beginning</p>
                 <SpotifyEmbed spotifyUrl="https://open.spotify.com/track/3qhlB30KknSejmIvZZLjOD?si=a084a797da404a92" />
+                <p className="mb-4 mt-4 text-base font-semibold text-white/90">love.</p>
+                <SpotifyEmbed spotifyUrl="https://open.spotify.com/track/5mtTAScDytxMMqZj14NmlN?si=3aedeacc686749c3" />
+                <p className="mb-4 mt-4 text-base font-semibold text-white/90">Polish Girl</p>
+                <SpotifyEmbed spotifyUrl="https://open.spotify.com/track/7vA9zWg6fmjLZn105Uj4TE?si=b7f6a8e407244934" />
               </div>
             </div>
           </div>

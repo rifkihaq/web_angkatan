@@ -1,6 +1,8 @@
 'use client'
 
 import React, { useEffect, useState, useMemo, useRef, useCallback } from 'react'
+import { createPortal } from 'react-dom'
+
 import Image from 'next/image'
 import Instagram from '@/components/atoms/button/InstagramButtonLink'
 import LinkedInButtonLink from '@/components/atoms/button/LinkedInButtonLink'
@@ -170,6 +172,10 @@ const MemberPopup = ({ isOpen, onClose }: MemberPopupProps) => {
       <style jsx global>{`
         @import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Space+Mono:ital,wght@0,400;0,700;1,400&family=Syne:wght@400;500;600;700;800&display=swap');
       `}</style>
+  return createPortal(
+    <div className="fixed inset-0 z-[100] flex items-start justify-center overflow-y-auto px-4">
+      {/* ===== AUDIO AUTOPLAY (Pastikan file mp3 ada di folder public) ===== */}
+      <audio ref={audioRef} loop src="/sign-of-the-times.mp3" />
 
       {/* ── All Keyframes & Scoped Styles ── */}
       <style jsx>{`
@@ -569,6 +575,33 @@ const MemberPopup = ({ isOpen, onClose }: MemberPopupProps) => {
       {phase === 'countdown' && (
         <div className="relative z-10 flex min-h-[320px] min-w-[320px] flex-col items-center justify-center">
           {/* Radial color glow — remounts on each number so animation restarts */}
+      {/* ===== MAIN CARD - GLASSMORPHISM CONTAINER (STRUKTUR JANGAN DIUBAH) ===== */}
+      <div
+        className="border-neutral-cs-10 bg-blue-cs-40 relative z-10 max-h-[100dvh] w-full max-w-[720px] animate-[member-popup-show_200ms_ease-out] overflow-y-auto rounded-2xl border-2 p-6 text-white shadow-xl sm:p-8"
+        style={{
+          /* EFEK GLASSMORPHISM DENGAN GRADASI 3 WARNA */
+          background:
+            'linear-gradient(135deg, rgba(230, 90, 40, 0.15) 0%, rgba(130, 45, 170, 0.15) 40%, rgba(59, 133, 0, 0.15) 100%)',
+          backdropFilter: 'blur(24px)', // Efek buram/kaca
+          WebkitBackdropFilter: 'blur(24px)',
+          borderColor: 'rgba(255, 255, 255, 0.2)', // Border putih tipis khas glass
+          boxShadow: '0 8px 32px 0 rgba(0, 0, 0, 0.3)',
+          animation: 'mp-airlock-open 600ms cubic-bezier(.2,.8,.2,1) both',
+          isolation: 'isolate'
+        }}
+      >
+        {/* === DEEP SPACE LAYER (HUD & Nebula - TANPA RADAR/SCANLINE) === */}
+        <div className="pointer-events-none absolute inset-0 overflow-hidden rounded-2xl">
+          {/* Nebula glow (Oranye, Biru-Ungu, Hijau #3b8500) */}
+          <div
+            className="absolute -inset-20"
+            style={{
+              background:
+                'radial-gradient(circle at 18% 12%, rgba(230, 90, 40, 0.2), transparent 45%), radial-gradient(circle at 85% 85%, rgba(59, 133, 0, 0.25), transparent 50%), radial-gradient(circle at 60% 30%, rgba(130, 45, 170, 0.2), transparent 55%)',
+              filter: 'blur(20px)'
+            }}
+          />
+          {/* HUD grid */}
           <div
             key={`glow-${countdownNum}`}
             className="pointer-events-none absolute"
@@ -1024,14 +1057,11 @@ const MemberPopup = ({ isOpen, onClose }: MemberPopupProps) => {
             </div>
           </div>
         </div>
-<<<<<<< HEAD
       )}
     </div>
-=======
       </div>
     </div>,
     document.body
->>>>>>> d5b846e884c03734d85e56dbd2efa02b188d44ce
   )
 }
 
