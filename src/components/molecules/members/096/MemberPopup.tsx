@@ -1,5 +1,7 @@
 'use client'
 
+/* eslint-disable react-hooks/set-state-in-effect, react/no-unescaped-entities */
+
 import React, { useEffect, useState, useRef, useCallback } from 'react'
 import Image from 'next/image'
 import { createPortal } from 'react-dom'

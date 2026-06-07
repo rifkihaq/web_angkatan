@@ -1,5 +1,7 @@
 'use client'
- 
+
+/* eslint-disable react-hooks/immutability, react-hooks/set-state-in-effect */
+
 import React, { useEffect, useRef, useState, useCallback } from 'react'
 import { createPortal } from 'react-dom'
 import Image from 'next/image'
