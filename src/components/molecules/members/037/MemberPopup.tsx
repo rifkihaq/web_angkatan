@@ -1,6 +1,10 @@
 'use client'
 
 import React, { useEffect, useState } from 'react'
+<<<<<<< HEAD
+=======
+import React, { useCallback, useEffect, useState } from 'react'
+>>>>>>> 1bcce9b292c7b4284d0191e85d8cdd63d13f5d83
 
 import Image from 'next/image'
 import { Cormorant_Garamond, Great_Vibes, Nunito, Silkscreen } from 'next/font/google'
@@ -79,10 +83,16 @@ const MemberPopup = ({ isOpen, onClose }: MemberPopupProps) => {
     return null
   }
 
-  return (
+  return createPortal(
     // PADA BAGIAN INI KAMU BOLEH MENGUBAH STYLE SESUKA HATI KAMU, TAPI JANGAN UBAH STRUKTUR DAN FUNGSI DARI KODE INI AGAR FUNGSI POPUP TETAP BERJALAN DENGAN BAIK
     <div
       className={`fixed inset-0 z-[100] flex items-center justify-center overflow-hidden px-3 py-3 sm:px-4 sm:py-8 ${bodyFont.className}`}
+<<<<<<< HEAD
+=======
+
+      className={`fixed inset-0 z-[100] flex items-start justify-center overflow-y-auto px-4 ${bodyFont.className}`}
+
+>>>>>>> 1bcce9b292c7b4284d0191e85d8cdd63d13f5d83
     >
       <style jsx global>{`
         @keyframes intro-gif-zoom {
@@ -216,7 +226,11 @@ const MemberPopup = ({ isOpen, onClose }: MemberPopupProps) => {
             style={{
               backgroundImage: `linear-gradient(135deg, rgba(3, 7, 18, 0.76), rgba(15, 39, 72, 0.72), rgba(3, 7, 18, 0.86)), url(${BackgroundImage.src})`,
               backgroundSize: 'cover',
+<<<<<<< HEAD
               backgroundPosition: 'center',
+=======
+              backgroundPosition: 'center'
+>>>>>>> 1bcce9b292c7b4284d0191e85d8cdd63d13f5d83
             }}
           />
 
@@ -239,11 +253,15 @@ const MemberPopup = ({ isOpen, onClose }: MemberPopupProps) => {
           <div className="pointer-events-none absolute h-[280px] w-[280px] rounded-full bg-[#ffefb3]/20 blur-3xl animate-[intro-glow-pulse_2800ms_ease-in-out_infinite] sm:h-[420px] sm:w-[420px]" />
 
           <div
+<<<<<<< HEAD
             className={`relative z-20 flex w-full max-w-[92vw] items-center justify-center overflow-visible rounded-[24px] bg-transparent sm:max-w-[720px] sm:rounded-[32px] ${
               introPhase === 'zooming'
+=======
+            className={`relative z-20 flex w-full max-w-[92vw] items-center justify-center sm:max-w-[720px] ${introPhase === 'zooming'
+>>>>>>> 1bcce9b292c7b4284d0191e85d8cdd63d13f5d83
                 ? 'animate-[intro-gif-zoom_1000ms_cubic-bezier(0.16,1,0.3,1)_forwards]'
                 : ''
-            }`}
+              }`}
           >
             <Image
               src={IntroGif}
@@ -318,7 +336,7 @@ const MemberPopup = ({ isOpen, onClose }: MemberPopupProps) => {
           </div>
 
           <div
-            className="member-popup-scroll relative z-10 max-h-[calc(100dvh-1.5rem)] w-full max-w-[720px] animate-[popup-reveal_700ms_cubic-bezier(0.16,1,0.3,1)_forwards] overflow-y-auto rounded-[24px] border border-[#ffefb3]/45 p-4 text-white shadow-[0_0_48px_rgba(255,239,179,0.28)] sm:max-h-[calc(100vh-4rem)] sm:rounded-[30px] sm:p-8 sm:shadow-[0_0_65px_rgba(255,239,179,0.34)]"
+            className="member-popup-scroll relative z-10 max-h-[100dvh] w-full max-w-[720px] animate-[popup-reveal_700ms_cubic-bezier(0.16,1,0.3,1)_forwards] overflow-y-auto rounded-[24px] border border-[#ffefb3]/45 p-4 text-white shadow-[0_0_48px_rgba(255,239,179,0.28)] sm:rounded-[30px] sm:p-8 sm:shadow-[0_0_65px_rgba(255,239,179,0.34)]"
             style={{
               backgroundImage: `linear-gradient(135deg, rgba(13, 35, 64, 0.68), rgba(45, 79, 115, 0.52), rgba(4, 18, 37, 0.78)), url(${BackgroundImage.src})`,
               backgroundSize: 'cover',
@@ -505,7 +523,8 @@ const MemberPopup = ({ isOpen, onClose }: MemberPopupProps) => {
           </div>
         </>
       )}
-    </div>
+    </div>,
+    document.body
   )
 }
 
