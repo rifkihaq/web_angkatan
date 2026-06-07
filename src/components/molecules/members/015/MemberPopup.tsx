@@ -1,9 +1,10 @@
 'use client'
 
-import { useEffect, useState, useRef } from 'react'
-import { createPortal } from 'react-dom'
+import { useCallback, useEffect, useState, useRef } from 'react'
 
 import Image from 'next/image'
+
+import { createPortal } from 'react-dom'
 
 import Instagram from '@/components/atoms/button/InstagramButtonLink'
 import LinkedInButtonLink from '@/components/atoms/button/LinkedInButtonLink'
@@ -143,11 +144,9 @@ function ProfileWithCrosshair() {
   ]
 
   // Keyframe positions for scope pan — object-position shifts
-  const panKeyframes = ['center 15%', '53% 20%', '47% 25%', '51% 18%', 'center 22%', '48% 19%', '52% 23%', 'center 17%']
-
   useEffect(() => {
     const id = setInterval(() => {
-      setPanStep((s) => (s + 1) % panKeyframes.length)
+      setPanStep((s) => (s + 1) % 8)
     }, 900)
     return () => clearInterval(id)
   }, [])
@@ -546,15 +545,19 @@ function GlobeScreen({ onDone }: { onDone: () => void }) {
 // ─── Main export ────────────────────────────────────────────────
 
 export default function MemberPopup({ onClose, isOpen = true }: MemberPopupProps) {
-  const popupRef = useRef<HTMLDivElement>(null)
   const [view, setView] = useState<ViewState>('terminal')
+
+  const closePopup = useCallback(() => {
+    setView('terminal')
+    onClose()
+  }, [onClose])
 
   useEffect(() => {
     if (!isOpen) return
 
     const handleKeyDown = (event: KeyboardEvent) => {
       if (event.key === 'Escape') {
-        onClose()
+        closePopup()
       }
     }
 
@@ -576,52 +579,26 @@ export default function MemberPopup({ onClose, isOpen = true }: MemberPopupProps
       window.scrollTo(0, scrollY)
       window.removeEventListener('keydown', handleKeyDown)
     }
-  }, [isOpen, onClose])
-
-  // reset terminal when popup closes and reopens
-  useEffect(() => {
-    if (isOpen) setView('terminal')
-  }, [isOpen])
+  }, [isOpen, closePopup])
 
   if (!isOpen) return null
 
-  return (
+  return createPortal(
     <div className="fixed inset-0 z-[100] flex items-start justify-center overflow-hidden bg-black/85 backdrop-blur-md">
-      <button type="button" onClick={onClose} className="absolute inset-0" aria-label="Close" />
+      <button type="button" onClick={closePopup} className="absolute inset-0" aria-label="Close" />
 
       <div
-        ref={popupRef}
-        className="relative z-10 mt-12 mb-8 w-full max-w-[720px] animate-[member-popup-show_200ms_ease-out] overflow-y-auto rounded-2xl sm:mt-16"
+        className="relative z-10 h-[100dvh] max-h-[100dvh] w-full max-w-[720px] animate-[member-popup-show_200ms_ease-out] overflow-y-auto overscroll-contain rounded-2xl"
         style={{
-          maxHeight: 'calc(100vh - 6rem)',
           background: 'linear-gradient(135deg, #020c0a 0%, #040d14 50%, #060810 100%)',
           border: '1px solid rgba(0,255,200,0.2)',
           boxShadow: '0 0 60px rgba(0,255,200,0.08), 0 0 120px rgba(59,130,246,0.05), inset 0 0 60px rgba(0,0,0,0.5)'
         }}
       >
         <ScanlineOverlay />
-  return createPortal(
-    // PADA BAGIAN INI KAMU BOLEH MENGUBAH STYLE SESUKA HATI KAMU, TAPI JANGAN UBAH STRUKTUR DAN FUNGSI DARI KODE INI AGAR FUNGSI POPUP TETAP BERJALAN DENGAN BAIK
-    <div className="fixed inset-0 z-[100] flex items-start justify-center overflow-y-auto px-4">
-      <button
-        type="button"
-        aria-label="Close member detail"
-        onClick={onClose}
-        className="absolute inset-0 bg-black/60 backdrop-blur-sm"
-      />
-
-      <div className="border-neutral-cs-10 bg-blue-cs-40 relative z-10 max-h-[100dvh] w-full max-w-[720px] animate-[member-popup-show_200ms_ease-out] overflow-y-auto rounded-2xl border-2 p-6 text-white shadow-xl sm:p-8">
-        <button
-          type="button"
-          aria-label="Close member detail"
-          onClick={onClose}
-          className="border-neutral-cs-10 hover:bg-neutral-cs-10/10 absolute top-4 right-4 flex h-9 w-9 items-center justify-center rounded-full border text-xl leading-none"
-        >
-          x
-        </button>
 
         {/* ── TERMINAL VIEW ── */}
-        {view === 'terminal' && <TerminalScreen onSuccess={() => setView('globe')} onClose={onClose} />}
+        {view === 'terminal' && <TerminalScreen onSuccess={() => setView('globe')} onClose={closePopup} />}
 
         {/* ── GLOBE TRANSITION ── */}
         {view === 'globe' && <GlobeScreen onDone={() => setView('profile')} />}
@@ -652,7 +629,7 @@ export default function MemberPopup({ onClose, isOpen = true }: MemberPopupProps
                 </span>
               </div>
               <button
-                onClick={onClose}
+                onClick={closePopup}
                 className="ml-auto flex h-10 w-10 items-center justify-center rounded border border-teal-500/40 bg-black/80 font-mono text-[16px] text-teal-400 transition-colors hover:bg-teal-500/20 hover:text-white"
               >
                 ✕
