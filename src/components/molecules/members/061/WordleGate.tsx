@@ -132,9 +132,6 @@ const WordleGate = ({ isOpen, onClose, onSolved, offsetDays = 0 }: Props) => {
     })
   }
 
-  /* reset whenever offset changes (new puzzle opened) */
-  useEffect(() => { setG(fresh()) }, [offsetDays, isOpen])
-
   /* scroll lock */
   useEffect(() => {
     if (isOpen) {
@@ -195,7 +192,7 @@ const WordleGate = ({ isOpen, onClose, onSolved, offsetDays = 0 }: Props) => {
     guess.forEach((l,i)=>{
       if(newMap[l]==='correct') return
       if(result[i]==='correct') newMap[l]='correct'
-      else if(result[i]==='present'&&newMap[l]!=='correct') newMap[l]='present'
+      else if(result[i]==='present') newMap[l]='present'
       else if(!newMap[l]) newMap[l]='absent'
     })
 

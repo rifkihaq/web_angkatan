@@ -18,8 +18,11 @@ const CardMember = () => {
   const [offsetDays,  setOffsetDays]    = useState(0)
 
   useEffect(() => {
-    if (typeof window !== 'undefined')
+    const timeout = window.setTimeout(() => {
       setIsSolved(localStorage.getItem(getTodayKey(0)) === 'true')
+    }, 0)
+
+    return () => window.clearTimeout(timeout)
   }, [])
 
   const handleCardClick = () => {
@@ -82,12 +85,15 @@ const CardMember = () => {
         </div>
       </div>
 
-      <WordleGate
-        isOpen={isGateOpen}
-        onClose={handleGateClose}
-        onSolved={handleWordleSolved}
-        offsetDays={offsetDays}
-      />
+      {isGateOpen && (
+        <WordleGate
+          key={offsetDays}
+          isOpen
+          onClose={handleGateClose}
+          onSolved={handleWordleSolved}
+          offsetDays={offsetDays}
+        />
+      )}
 
       <MemberPopup
         isOpen={isPopupOpen}
