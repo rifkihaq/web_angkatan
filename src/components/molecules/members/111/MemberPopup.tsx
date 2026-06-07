@@ -1,6 +1,9 @@
 'use client'
 
 import React, { useEffect, useState } from 'react'
+import React, { useEffect } from 'react'
+import { createPortal } from 'react-dom'
+
 import Image from 'next/image'
 import Instagram from '@/components/atoms/button/InstagramButtonLink'
 import LinkedInButtonLink from '@/components/atoms/button/LinkedInButtonLink'
@@ -58,6 +61,9 @@ const MemberPopup = ({ isOpen, onClose }: MemberPopupProps) => {
       }} />
 
       {/* Backdrop */}
+  return createPortal(
+    // PADA BAGIAN INI KAMU BOLEH MENGUBAH STYLE SESUKA HATI KAMU, TAPI JANGAN UBAH STRUKTUR DAN FUNGSI DARI KODE INI AGAR FUNGSI POPUP TETAP BERJALAN DENGAN BAIK
+    <div className="fixed inset-0 z-[100] flex items-start justify-center overflow-y-auto px-4">
       <button
         type="button"
         aria-label="Close member detail"
@@ -241,10 +247,49 @@ const MemberPopup = ({ isOpen, onClose }: MemberPopupProps) => {
               {/* === === === === === === === === === === === === === === === */}
 
             </div>
+      <div className="border-neutral-cs-10 bg-blue-cs-40 relative z-10 max-h-[100dvh] w-full max-w-[720px] animate-[member-popup-show_200ms_ease-out] overflow-y-auto rounded-2xl border-2 p-6 text-white shadow-xl sm:p-8">
+        <button
+          type="button"
+          aria-label="Close member detail"
+          onClick={onClose}
+          className="border-neutral-cs-10 hover:bg-neutral-cs-10/10 absolute top-4 right-4 flex h-9 w-9 items-center justify-center rounded-full border text-xl leading-none"
+        >
+          x
+        </button>
+
+        <div className="border-neutral-cs-10/40 mb-5 overflow-hidden rounded-2xl border">
+          <Image src={ProfileImage} alt="Profile Image" className="h-120 w-full object-cover object-center" />
+        </div>
+
+        <div className="pr-10">
+          {/* UBAH NAMA ANDA */}
+          <h2 className="text-2xl font-black">Catherina Vallencia K</h2>
+          {/* UBAH NRP DAN ASAL */}
+          <p className="text-neutral-cs-10/70 mt-1 text-sm font-semibold">5027251082 - Surakarta</p>
+        </div>
+
+        <div className="mt-5 flex gap-2">
+          {/* UBAH USERNAME INSTAGRAM */}
+          <Instagram username="jkt48.erine" />
+          {/* UBAH USERNAME LINKEDIN */}
+          <LinkedInButtonLink username="jkt48.erine" />
+        </div>
+
+        <div className="mt-6 grid gap-4 text-sm font-semibold sm:grid-cols-2">
+          <div className="border-neutral-cs-10/40 rounded-xl border p-4">
+            {/* UBAH HOBI KAMU */}
+            <p className="text-neutral-cs-10/60 text-xs tracking-wide uppercase">Hobi</p>
+            <p className="mt-2">Nyanyi</p>
+          </div>
+          <div className="border-neutral-cs-10/40 rounded-xl border p-4">
+            {/* UBAH FUNFACT KAMU */}
+            <p className="text-neutral-cs-10/60 text-xs tracking-wide uppercase">Fun Fact</p>
+            <p className="mt-2">Gwe Member JKT</p>
           </div>
         </div>
       </div>
-    </div>
+    </div>,
+    document.body
   )
 }
 
