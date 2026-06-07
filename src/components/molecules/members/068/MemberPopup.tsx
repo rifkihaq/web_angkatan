@@ -1,5 +1,6 @@
 'use client'
 
+
 import { useCallback, useEffect, useRef, useState } from 'react'
 import { createPortal } from 'react-dom'
 import { F1Minigame } from '@/components/molecules/members/068/f1-minigame'
@@ -346,6 +347,7 @@ const MemberPopup = ({ isOpen, onClose }: MemberPopupProps) => {
     setBgmMuted((prev) => !prev)
   }
 
+
   if (!isOpen || !mounted) return null
 
   // ── SCREEN 1: F1 Mini-game ──
@@ -662,6 +664,7 @@ const MemberPopup = ({ isOpen, onClose }: MemberPopupProps) => {
         </div>
       </div>
 
+
       <style>{`
         @keyframes bubble-float {
           0%, 100% { transform: translateY(0px) scale(1); opacity: 0.65; }
@@ -678,6 +681,7 @@ const MemberPopup = ({ isOpen, onClose }: MemberPopupProps) => {
         }
       `}</style>
       </div>{/* end scrollable container */}
+
     </div>,
     document.body
   )
