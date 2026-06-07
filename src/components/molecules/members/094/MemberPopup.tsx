@@ -271,11 +271,11 @@ const MemberPopup = ({ isOpen, onClose }: MemberPopupProps) => {
             key={i}
             className="fire-particle"
             style={{
-              width: `${4 + Math.random() * 6}px`,
-              height: `${7 + Math.random() * 8}px`,
+              width: `${4 + (i * 7) % 6}px`,
+              height: `${7 + (i * 5) % 8}px`,
               background: ['rgba(255,69,0,0.75)', 'rgba(220,38,38,0.8)', 'rgba(255,140,0,0.6)', 'rgba(255,200,50,0.55)'][i % 4],
               left: `${8 + i * 9}%`,
-              bottom: `${Math.random() * 30}px`,
+              bottom: `${(i * 11) % 30}px`,
               animationDuration: `${1.2 + i * 0.3}s`,
               animationDelay: `${i * 0.35}s`,
               ['--px' as string]: `${(i % 2 === 0 ? 1 : -1) * (10 + i * 3)}px`,

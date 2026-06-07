@@ -1,9 +1,10 @@
 'use client'
 
-import React, { useEffect, useRef, useState } from 'react'
-import { createPortal } from 'react-dom'
+import React, { useCallback, useEffect, useRef, useState } from 'react'
 
 import Image from 'next/image'
+
+import { createPortal } from 'react-dom'
 
 import Instagram from '@/components/atoms/button/InstagramButtonLink'
 import LinkedInButtonLink from '@/components/atoms/button/LinkedInButtonLink'
@@ -28,68 +29,62 @@ const MemberPopup = ({ isOpen, onClose }: MemberPopupProps) => {
   const [showCard, setShowCard] = useState(false)
   const timersRef = useRef<ReturnType<typeof setTimeout>[]>([])
 
-  const killAll = () => {
+  const killAll = useCallback(() => {
     timersRef.current.forEach(clearTimeout)
     timersRef.current = []
-  }
+  }, [])
 
-  const runIntro = () => {
+  const closePopup = useCallback(() => {
+    killAll()
     setSlideIndex(0)
     setShowCard(false)
-    let cur = 0
+    onClose()
+  }, [killAll, onClose])
+
+  useEffect(() => {
+    if (!isOpen) return
+
+    const handleKeyDown = (e: KeyboardEvent) => {
+      if (e.key === 'Escape') closePopup()
+    }
+
+    let currentSlide = 0
     const advance = () => {
-      cur++
-      if (cur < TOTAL_SLIDES) {
-        setSlideIndex(cur)
-        const t = setTimeout(advance, 250)
-        timersRef.current.push(t)
+      currentSlide++
+      if (currentSlide < TOTAL_SLIDES) {
+        setSlideIndex(currentSlide)
+        const timer = setTimeout(advance, 250)
+        timersRef.current.push(timer)
       } else {
         setShowCard(true)
       }
     }
-    const t = setTimeout(advance, 1000)
-    timersRef.current.push(t)
-  }
+    const timer = setTimeout(advance, 1000)
+    timersRef.current.push(timer)
 
-  useEffect(() => {
-    if (!isOpen) { killAll(); setSlideIndex(0); setShowCard(false); return }
-    const handleKeyDown = (e: KeyboardEvent) => { if (e.key === 'Escape') onClose() }
     document.body.style.overflow = 'hidden'
     window.addEventListener('keydown', handleKeyDown)
-    runIntro()
+
     return () => {
       document.body.style.overflow = ''
       window.removeEventListener('keydown', handleKeyDown)
       killAll()
     }
-  }, [isOpen])
+  }, [isOpen, closePopup, killAll])
 
   if (!isOpen) return null
 
   const mono = "'IBM Plex Mono', 'Courier New', monospace" as const
   const slideImages = [Slide1, Slide2, Slide3, Slide4, Slide5]
 
-  return (
-    <>
-      <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@900&family=IBM+Plex+Mono:wght@400;700&display=swap" rel="stylesheet" />
-
-      {/* PADA BAGIAN INI KAMU BOLEH MENGUBAH STYLE SESUKA HATI KAMU, TAPI JANGAN UBAH STRUKTUR DAN FUNGSI DARI KODE INI AGAR FUNGSI POPUP TETAP BERJALAN DENGAN BAIK */}
-      <div className="fixed inset-0 z-[100] flex items-start justify-center overflow-y-auto px-4 pt-28 pb-8 sm:pt-32">
   return createPortal(
-    // PADA BAGIAN INI KAMU BOLEH MENGUBAH STYLE SESUKA HATI KAMU, TAPI JANGAN UBAH STRUKTUR DAN FUNGSI DARI KODE INI AGAR FUNGSI POPUP TETAP BERJALAN DENGAN BAIK
-    <div className="fixed inset-0 z-[100] flex items-start justify-center overflow-y-auto px-4">
-      <button
-        type="button"
-        aria-label="Close member detail"
-        onClick={onClose}
-        className="absolute inset-0 bg-black/60 backdrop-blur-sm"
-      />
-
-      <div className="border-neutral-cs-10 bg-blue-cs-40 relative z-10 max-h-[100dvh] w-full max-w-[720px] animate-[member-popup-show_200ms_ease-out] overflow-y-auto rounded-2xl border-2 p-6 text-white shadow-xl sm:p-8">
+    <>
+      {/* PADA BAGIAN INI KAMU BOLEH MENGUBAH STYLE SESUKA HATI KAMU, TAPI JANGAN UBAH STRUKTUR DAN FUNGSI DARI KODE INI AGAR FUNGSI POPUP TETAP BERJALAN DENGAN BAIK */}
+      <div className="fixed inset-0 z-[100] flex items-start justify-center overflow-hidden px-4">
         <button
           type="button"
           aria-label="Close member detail"
-          onClick={onClose}
+          onClick={closePopup}
           className="absolute inset-0 bg-black/60 backdrop-blur-sm"
         />
 
@@ -97,8 +92,8 @@ const MemberPopup = ({ isOpen, onClose }: MemberPopupProps) => {
         <div
           className="relative z-10 w-full max-w-[560px]"
           style={{
-            height: 'calc(100vh - 9rem)',
-            maxHeight: 'calc(100vh - 9rem)',
+            height: '100dvh',
+            maxHeight: '100dvh',
             border: '2px solid #fff',
             borderRadius: 0,
             overflow: 'hidden',
@@ -163,7 +158,7 @@ const MemberPopup = ({ isOpen, onClose }: MemberPopupProps) => {
             <button
               type="button"
               aria-label="Close member detail"
-              onClick={onClose}
+              onClick={closePopup}
               style={{
                 position: 'absolute', top: 16, right: 16,
                 width: 34, height: 34,
@@ -265,8 +260,7 @@ const MemberPopup = ({ isOpen, onClose }: MemberPopupProps) => {
           </div>
         </div>
       </div>
-    </>
-    </div>,
+    </>,
     document.body
   )
 }

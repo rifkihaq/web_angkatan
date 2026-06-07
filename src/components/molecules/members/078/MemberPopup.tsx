@@ -43,7 +43,7 @@ const MemberPopup = ({ isOpen, onClose }: MemberPopupProps) => {
 
   return createPortal(
     // PADA BAGIAN INI KAMU BOLEH MENGUBAH STYLE SESUKA HATI KAMU, TAPI JANGAN UBAH STRUKTUR DAN FUNGSI DARI KODE INI AGAR FUNGSI POPUP TETAP BERJALAN DENGAN BAIK
-    <div className="fixed inset-0 z-[100] flex items-start justify-center overflow-y-auto px-4">
+    <div className="fixed inset-0 z-[100] flex items-start justify-center overflow-hidden px-4">
       <button
         type="button"
         aria-label="Close member detail"
@@ -51,7 +51,7 @@ const MemberPopup = ({ isOpen, onClose }: MemberPopupProps) => {
         className="absolute inset-0 bg-black/60 backdrop-blur-sm"
       />
 
-      <div className="border-white/50 bg-gradient-to-br from-pink-300 via-orange-200 to-cyan-200  relative z-10 max-h-screen w-full max-w-[720px] animate-[member-popup-show_200ms_ease-out] overflow-y-auto rounded-2xl border-2 p-6 text-slate-800 shadow-2xl sm:p-8">
+      <div className="border-white/50 bg-gradient-to-br from-pink-300 via-orange-200 to-cyan-200 relative z-10 h-[100dvh] max-h-[100dvh] w-full max-w-[720px] animate-[member-popup-show_200ms_ease-out] overflow-y-auto overscroll-contain rounded-2xl border-2 p-6 text-slate-800 shadow-2xl sm:p-8">
         <button
           type="button"
           aria-label="Close member detail"
@@ -95,7 +95,7 @@ const MemberPopup = ({ isOpen, onClose }: MemberPopupProps) => {
         <div className="bg-white/20 backdrop-blur-md border-white/40 mt-4 rounded-xl border p-4">
           {/* UBAH LAGU FAVORIT KAMU */}
           <p className="text-neutral-cs-10/60 text-xs font-bold tracking-wide uppercase">Lagu Favorit</p>
-          <p className="mt-1 text-sm italic text-slate-600>Air & Api</p>
+          <p className="mt-1 text-sm italic text-slate-600">Air &amp; Api</p>
 
           {/* UBAH URL SPOTIFY KAMU DENGAN LAGU FAVORIT MU */}
           <SpotifyEmbed spotifyUrl="https://open.spotify.com/intl-id/track/0Z3E3USDNRILRhQBwy0ljP?si=f019dc28fbd1469e" />
