@@ -16,9 +16,8 @@ import ChantFog from './chant_fog.gif'
 import FoolLogo from './fool_logo_fix.png'
 import CardBg from './card_bg.jpg'
 
-// ============================================================================
 // FONTS
-// ============================================================================
+
 
 const cinzelDecorative = localFont({
   src: './fonts/CinzelDecorative-Regular.ttf',
