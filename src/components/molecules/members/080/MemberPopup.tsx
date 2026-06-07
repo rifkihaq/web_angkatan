@@ -91,14 +91,14 @@ transition-all
         </button>
 
         <div
-  className="
+          className="
   mb-5
   overflow-hidden
   rounded-2xl
   border
   border-red-900/40
 "
->
+        >
           <Image src={ProfileImage} alt="Profile Image" className="
 h-120
 w-full
@@ -147,7 +147,7 @@ uppercase
             <p className="mt-2">Books, Bikes, & Music</p>
           </div>
           <div
-  className="
+            className="
   rounded-2xl
   border
   border-red-900/30
@@ -157,7 +157,7 @@ uppercase
   transition-all
   hover:border-red-700/50
 "
->
+          >
             {/* UBAH FUNFACT KAMU */}
             <p className="
 text-red-400
@@ -181,18 +181,18 @@ p-4
 ">
           {/* UBAH LAGU FAVORIT KAMU */}
           <p
-  className="
+            className="
   text-red-400
   text-xs
   font-bold
   tracking-[0.2em]
   uppercase
 "
->Lagu Favorit</p>
+          >Lagu Favorit</p>
           <p className="my-2 text-sm font-semibold">Alexandra - Reality Club</p>
 
           {/* UBAH URL SPOTIFY KAMU DENGAN LAGU FAVORIT MU */}
-          <SpotifyEmbed spotifyUrl="https://open.spotify.com/track/2X62SjtuwVQiGiZvZZ9Ztr?si=f6718391848a4469" />
+          <SpotifyEmbed spotifyUrl="https://open.spotify.com/track/6ZGgaShxOimGDfRz1T1zje?si=55d5cabe9faa49c0" />
         </div>
       </div>
     </div>,

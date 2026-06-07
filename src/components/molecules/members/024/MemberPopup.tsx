@@ -1,6 +1,6 @@
 'use client'
 
-import React, { useEffect } from 'react'
+import React, { useEffect, useRef } from 'react'
 import { createPortal } from 'react-dom'
 
 import Image from 'next/image'
@@ -17,6 +17,8 @@ type MemberPopupProps = {
 }
 
 const MemberPopup = ({ isOpen, onClose }: MemberPopupProps) => {
+  const popupRef = useRef<HTMLDivElement>(null)
+
   useEffect(() => {
     if (!isOpen) {
       return
@@ -36,6 +38,32 @@ const MemberPopup = ({ isOpen, onClose }: MemberPopupProps) => {
       window.removeEventListener('keydown', handleKeyDown)
     }
   }, [isOpen, onClose])
+
+  useEffect(() => {
+    if (!isOpen || !popupRef.current) {
+      return
+    }
+
+    const itemAnimations = Array.from(popupRef.current.querySelectorAll<HTMLElement>('[data-popup-item]')).map(
+      (item, index) =>
+        item.animate(
+          [
+            { opacity: 0, transform: 'translateY(-32px)' },
+            { opacity: 1, transform: 'translateY(0)' },
+          ],
+          {
+            duration: 450,
+            delay: 100 + index * 90,
+            easing: 'cubic-bezier(0.22, 1, 0.36, 1)',
+            fill: 'both',
+          }
+        )
+    )
+
+    return () => {
+      itemAnimations.forEach((animation) => animation.cancel())
+    }
+  }, [isOpen])
 
   if (!isOpen) {
     return null
@@ -64,7 +92,7 @@ const MemberPopup = ({ isOpen, onClose }: MemberPopupProps) => {
           <Image src={ProfileImage} alt="Profile Image" className="h-120 w-full object-cover object-center" />
         </div>
 
-        <div className="pr-10">
+        <div data-popup-item className="pr-10">
           {/* UBAH NAMA ANDA */}
           <h2 className="text-2xl font-black text-green-900">Muhammad Rafi Pramudya Putra</h2>
           {/* UBAH NRP DAN ASAL */}

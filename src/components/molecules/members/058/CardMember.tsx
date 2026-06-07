@@ -53,7 +53,7 @@ const CardMember = () => {
             </div>
           </div>
           {/*  JANGAN PERNAH UBAH STRUKTUR CARD MEMBER KARENA KODE INI AKAN DI-CRAWL OLEH SCRIPT UNTUK MENGAMBIL DATA MEMBER, UBAH DATA MEMBER YANG DIPERLUKAN SAJA. JANGAN JUGA UBAH STYLE CARD MEMBER KARENA STYLE YANG SAMA DIBUTUHKAN AGAR TAMPILAN WEBSITE KONSISTEN */}
-          <div className="bg-red-950/50 rounded-2xl border-2 border-neutral-50 px-3 py-4 text-sm font-extrabold text-neutral-100">
+          <div className="bg-blue-cs-40 rounded-2xl border-2 border-neutral-50 px-3 py-4 text-sm font-extrabold text-neutral-100">
             {/* UBAH NAMA KAMU */}
             <p>Azita Zahwa Zahida Asmoro</p>
             {/* UBAH NRP KAMU */}
