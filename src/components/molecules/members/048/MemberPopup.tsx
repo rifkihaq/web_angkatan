@@ -15,7 +15,7 @@ type MemberPopupProps = {
   onClose: () => void
 }
 
-const MemberPopup = ({ isOpen, onClose }: MemberPopupProps) => {
+const MemberPopup = ({ isOpen, onClose }: MemberPopupProps) => 
   useEffect(() => {
     if (!isOpen) {
       return
@@ -43,22 +43,21 @@ const MemberPopup = ({ isOpen, onClose }: MemberPopupProps) => {
   return (
     // PADA BAGIAN INI KAMU BOLEH MENGUBAH STYLE SESUKA HATI KAMU, TAPI JANGAN UBAH STRUKTUR DAN FUNGSI DARI KODE INI AGAR FUNGSI POPUP TETAP BERJALAN DENGAN BAIK
     <div className="fixed inset-0 z-[100] flex items-start justify-center overflow-y-auto px-4 pt-28 pb-8 sm:pt-32">
-      <button
-        type="button"
-        aria-label="Close member detail"
-        onClick={onClose}
-        className="absolute inset-0 bg-black/60 backdrop-blur-sm"
-      />
-
-      <div className="border-neutral-cs-10 bg-blue-cs-40 relative z-10 max-h-[calc(100vh-9rem)] w-full max-w-[720px] animate-[member-popup-show_200ms_ease-out] overflow-y-auto rounded-2xl border-2 p-6 text-white shadow-xl sm:max-h-[calc(100vh-10rem)] sm:p-8">
-        <button
-          type="button"
-          aria-label="Close member detail"
-          onClick={onClose}
-          className="border-neutral-cs-10 hover:bg-neutral-cs-10/10 absolute top-4 right-4 flex h-9 w-9 items-center justify-center rounded-full border text-xl leading-none"
-        >
-          x
-        </button>
+  <button
+    type="button"
+    aria-label="Close member detail"
+    onClick={onClose}
+    className="absolute inset-0 bg-black/70 backdrop-blur-md transition-opacity duration-300"
+  />
+  <div className="border-blue-cs-40/40 bg-gradient-to-b from-blue-cs-40 to-blue-cs-30 relative z-10 max-h-[calc(100vh-9rem)] w-full max-w-[720px] animate-[member-popup-show_200ms_ease-out] overflow-y-auto rounded-3xl border-2 p-6 text-white shadow-2xl sm:max-h-[calc(100vh-10rem)] sm:p-8 before:pointer-events-none before:absolute before:inset-0 before:rounded-3xl before:bg-gradient-to-t before:from-blue-cs-40/20 before:to-transparent">
+    <button
+      type="button"
+      aria-label="Close member detail"
+      onClick={onClose}
+      className="border-white/30 hover:border-white/60 hover:bg-white/10 absolute top-4 right-4 flex h-10 w-10 items-center justify-center rounded-full border-2 text-xl leading-none font-bold transition-all duration-200 hover:scale-110"
+    >
+      ✕
+    </button>
 
         <div className="border-neutral-cs-10/40 mb-5 overflow-hidden rounded-2xl border">
           <Image src={ProfileImage} alt="Profile Image" className="h-120 w-full object-cover object-center" />
@@ -97,7 +96,7 @@ const MemberPopup = ({ isOpen, onClose }: MemberPopupProps) => {
           <p className="my-2 text-sm font-semibold">Sunsetz</p>
 
           {/* UBAH URL SPOTIFY KAMU DENGAN LAGU FAVORIT MU */}
-          <SpotifyEmbed spotifyUrl="https://open.spotify.com/user/31g5rutdouddvqq2ldcejicav6ey?si=_6gL1NWHQKepLO2LwW2oqw" />
+          <SpotifyEmbed spotifyUrl="https://open.spotify.com/track/0yuAWlxq59xT3agQ965OxE?si=xJgvh7N5TEaJkS26EnMQkw />
         </div>
       </div>
     </div>
