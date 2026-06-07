@@ -236,7 +236,7 @@ const MemberPopup = ({ isOpen, onClose }: MemberPopupProps) => {
         />
 
         <div
-          className="relative z-10 h-[100dvh] max-h-[100dvh] w-full max-w-[720px] overflow-x-hidden overflow-y-auto p-6 sm:p-8 rounded-2xl border-2 text-white shadow-2xl transition-all duration-500 ease-out select-none bg-[radial-gradient(ellipse_at_top,_var(--tw-gradient-stops))] from-neutral-900 via-[#0d0707] to-black border-orange-600/40 hover:border-orange-500 interactive-fire card-container group animate-fire-active"
+          className="relative z-10 h-[100dvh] max-h-[100dvh] w-full max-w-[720px] overflow-hidden rounded-2xl border-2 text-white shadow-2xl transition-all duration-500 ease-out select-none bg-[radial-gradient(ellipse_at_top,_var(--tw-gradient-stops))] from-neutral-900 via-[#0d0707] to-black border-orange-600/40 hover:border-orange-500 interactive-fire card-container group animate-fire-active"
           onMouseMove={(e) => {
             const rect = e.currentTarget.getBoundingClientRect()
             const x = e.clientX - rect.left
@@ -293,8 +293,9 @@ const MemberPopup = ({ isOpen, onClose }: MemberPopupProps) => {
             onClick={onClose}
             className="absolute top-4 right-4 flex h-9 w-9 items-center justify-center rounded-full border text-xl leading-none z-[60] transition-all duration-300 border-[#ff4500]/50 text-[#ff4500] bg-black/60 backdrop-blur-sm hover:bg-[#ff4500] hover:text-white hover:border-[#ff4500] hover:scale-110 hover:shadow-[0_0_15px_#ff4500]"
           >×</button>
-          {/* ORNAMEN IDENTITAS: Crossover Fire Force x Black Clover */}
-          <div className="relative z-10 flex justify-between items-center mb-6 border-b border-[#ff4500]/30 pb-2 text-[11px] font-mono tracking-widest text-[#ff4500]">
+          <div className="absolute inset-0 overflow-y-auto overflow-x-hidden p-6 sm:p-8 z-[30]">
+            {/* ORNAMEN IDENTITAS: Crossover Fire Force x Black Clover */}
+            <div className="relative z-10 flex justify-between items-center mb-6 border-b border-[#ff4500]/30 pb-2 text-[11px] font-mono tracking-widest text-[#ff4500]">
             <div className="flex items-center gap-2">
               <span className="dot-pulse-anim" />
               <span>GRIMOIRE // 8TH BRIGADE</span>
@@ -343,8 +344,10 @@ const MemberPopup = ({ isOpen, onClose }: MemberPopupProps) => {
               <SpotifyEmbed spotifyUrl="https://open.spotify.com/track/7zAt4tdL44D3VuzsvM0N8n?si=2904e26f70974d0a" />
             </div>
 
-            {/* LAYER 2: GRIMOIRE ASTA & KUNCI (Klik Key untuk Unlock)    */}
-            {/* ========================================================= */}
+          </div>
+
+          {/* LAYER 2: GRIMOIRE ASTA & KUNCI (Klik Key untuk Unlock)    */}
+          {/* ========================================================= */}
             <div
               className="absolute inset-0 z-40 bg-[#0d0d0d] flex flex-col items-center justify-center p-8 transition-all duration-1000 ease-in-out cursor-pointer overflow-hidden"
               onClick={(e) => {
