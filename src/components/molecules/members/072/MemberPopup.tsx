@@ -60,7 +60,7 @@ const MemberPopup = ({ isOpen, onClose }: MemberPopupProps) => {
             audioRef.current?.play().catch(() => { }) // Lanjut BGM jika Spotify pause
           }
         }
-      } catch (err) { }
+      } catch { }
     }
 
     window.addEventListener('message', handleSpotifyMessage)

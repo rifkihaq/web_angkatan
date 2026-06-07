@@ -5,6 +5,8 @@ import { createPortal } from 'react-dom'
 
 import Image from 'next/image'
 
+import { createPortal } from 'react-dom'
+
 import Instagram from '@/components/atoms/button/InstagramButtonLink'
 import LinkedInButtonLink from '@/components/atoms/button/LinkedInButtonLink'
 import SpotifyEmbed from '@/components/molecules/SpotifyEmbed'
@@ -27,19 +29,12 @@ const MemberPopup = ({ isOpen, onClose }: MemberPopupProps) => {
 
   useEffect(() => {
     if (!isOpen) {
-      setAccessCode('')
-      setError('')
-      setTerminalText('')
-      setIsAuthorizing(false)
-      setAccessGranted(false)
-
-      document.body.style.overflow = ''
       return
     }
 
     const handleKeyDown = (event: KeyboardEvent) => {
       if (event.key === 'Escape') {
-        onClose()
+        closePopup()
       }
     }
 
@@ -50,7 +45,7 @@ const MemberPopup = ({ isOpen, onClose }: MemberPopupProps) => {
       document.body.style.overflow = ''
       window.removeEventListener('keydown', handleKeyDown)
     }
-  }, [isOpen, onClose])
+  }, [isOpen, closePopup])
 
   const handleAuthorize = async () => {
     if (accessCode !== '057') {
@@ -262,7 +257,7 @@ const MemberPopup = ({ isOpen, onClose }: MemberPopupProps) => {
       <button
         type="button"
         aria-label="Close member detail"
-        onClick={onClose}
+        onClick={closePopup}
         className="fixed inset-0 bg-black/90 z-[9999]"
       />
 
@@ -297,7 +292,7 @@ const MemberPopup = ({ isOpen, onClose }: MemberPopupProps) => {
           <button
             type="button"
             aria-label="Close member detail"
-            onClick={onClose}
+            onClick={closePopup}
             className="border-neutral-cs-10 hover:bg-neutral-cs-10/10 absolute top-4 right-4 flex h-9 w-9 items-center justify-center rounded-full border text-xl leading-none"
           >
             x
