@@ -1,6 +1,7 @@
 'use client'
 
 import React, { useEffect } from 'react'
+import { createPortal } from 'react-dom'
 
 import Image from 'next/image'
 
@@ -40,9 +41,9 @@ const MemberPopup = ({ isOpen, onClose }: MemberPopupProps) => {
     return null
   }
 
-  return (
+  return createPortal(
     // PADA BAGIAN INI KAMU BOLEH MENGUBAH STYLE SESUKA HATI KAMU, TAPI JANGAN UBAH STRUKTUR DAN FUNGSI DARI KODE INI AGAR FUNGSI POPUP TETAP BERJALAN DENGAN BAIK
-    <div className="fixed inset-0 z-[100] flex items-start justify-center overflow-y-auto px-4 pt-28 pb-8 sm:pt-32">
+    <div className="fixed inset-0 z-[100] flex items-start justify-center overflow-y-auto px-4">
       <button
         type="button"
         aria-label="Close member detail"
@@ -50,6 +51,7 @@ const MemberPopup = ({ isOpen, onClose }: MemberPopupProps) => {
         className="absolute inset-0 bg-black/60 backdrop-blur-sm"
       />
 
+<<<<<<< HEAD
       <div className="relative z-10 w-full max-w-[720px] max-h-[calc(100vh-9rem)] overflow-hidden overflow-y-auto rounded-2xl p-6 text-white shadow-2xl border border-sky-300/50 bg-gradient-to-br from-sky-400 via-blue-400 to-blue-500 animate-[member-popup-show_200ms_ease-out] sm:max-h-[calc(100vh-10rem)] sm:p-8">
         {/* Decorative mountain silhouette to match blue-mountain theme (style-only) */}
         <div className="pointer-events-none absolute left-0 right-0 top-6 -z-0 opacity-30">
@@ -63,6 +65,9 @@ const MemberPopup = ({ isOpen, onClose }: MemberPopupProps) => {
             <path d="M0,160 L120,120 L240,140 L360,80 L480,130 L600,100 L720,140 L840,90 L960,130 L1080,110 L1200,150 L1200,200 L0,200 Z" fill="url(#g1)" />
           </svg>
         </div>
+=======
+      <div className="relative z-10 w-full max-w-[720px] max-h-[100dvh] overflow-y-auto rounded-2xl p-6 text-white shadow-2xl border border-neutral-cs-10 bg-gradient-to-br from-blue-600 via-indigo-600 to-purple-700 animate-[member-popup-show_200ms_ease-out] sm:p-8">
+>>>>>>> 631079abc1bb695d6e9d60231f6c6d42b8db9543
         <button
           type="button"
           aria-label="Close member detail"
@@ -113,7 +118,8 @@ const MemberPopup = ({ isOpen, onClose }: MemberPopupProps) => {
           <SpotifyEmbed spotifyUrl="https://open.spotify.com/track/0rmhhawrhWNqqZprQTGWWz?si=2d87b71c8e1948a2" />
         </div>
       </div>
-    </div>
+    </div>,
+    document.body
   )
 }
 
