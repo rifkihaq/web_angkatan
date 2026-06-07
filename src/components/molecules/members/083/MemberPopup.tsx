@@ -42,7 +42,7 @@ const MemberPopup = ({ isOpen, onClose }: MemberPopupProps) => {
   }
 
   return createPortal(
-    <div className="fixed inset-0 z-[100] flex items-start justify-center overflow-y-auto px-4 pt-28 pb-8 sm:pt-32">
+    <div className="fixed inset-0 z-[100] flex items-start justify-center overflow-y-auto px-4">
       
       {/* AREA BACKDROP */}
       <button
@@ -53,7 +53,7 @@ const MemberPopup = ({ isOpen, onClose }: MemberPopupProps) => {
       />
 
       {/* MODAL CONTAINER - DARK GLASSMORPHISM BACKGROUND */}
-      <div className="relative z-10 max-h-[calc(100vh-9rem)] w-full max-w-[720px] animate-[member-popup-show_200ms_ease-out] overflow-y-auto rounded-3xl border border-white/10 bg-gradient-to-br from-slate-900 via-indigo-950 to-slate-900 p-6 text-white shadow-2xl sm:max-h-[calc(100vh-10rem)] sm:p-8">
+      <div className="relative z-10 max-h-[100dvh] w-full max-w-[720px] animate-[member-popup-show_200ms_ease-out] overflow-y-auto rounded-3xl border border-white/10 bg-gradient-to-br from-slate-900 via-indigo-950 to-slate-900 p-6 text-white shadow-2xl sm:p-8">
         
         {/* TOMBOL CLOSE */}
         <button
@@ -73,7 +73,7 @@ const MemberPopup = ({ isOpen, onClose }: MemberPopupProps) => {
         {/* NAMA & ASAL */}
         <div className="pr-10">
           <h2 className="text-2xl font-black tracking-tight flex items-center gap-3">
-            <span>👋</span> D'Qhaizhar Ari Dhiaulhaq
+            <span>👋</span> D&apos;Qhaizhar Ari Dhiaulhaq
           </h2>
           <p className="mt-1 text-sm font-semibold text-indigo-200 flex items-center gap-2">
             <span>📍</span> 5027251083 - Surabaya

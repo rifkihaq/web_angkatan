@@ -2,9 +2,13 @@
 
 import React, { useEffect, useRef, useState } from 'react'
 import Image from 'next/image'
+
+import { createPortal } from 'react-dom'
+
 import Instagram from '@/components/atoms/button/InstagramButtonLink'
 import LinkedInButtonLink from '@/components/atoms/button/LinkedInButtonLink'
 import SpotifyEmbed from '@/components/molecules/SpotifyEmbed'
+
 import ProfileImage from './image.png'
 
 type MemberPopupProps = {
@@ -18,8 +22,27 @@ const STARS = Array.from({ length: 60 }, (_, i) => ({
   left: Math.random() * 100,
   size: Math.random() * 1.5 + 0.5,
   gold: Math.random() > 0.75,
-  opacity: Math.random() * 0.6 + 0.2,
+  opacity: Math.random() * 0.6 + 0.2
 }))
+
+const StarField = () => (
+  <div className="pointer-events-none absolute inset-0 overflow-hidden">
+    {STARS.map((star) => (
+      <div
+        key={star.id}
+        className="absolute rounded-full"
+        style={{
+          top: `${star.top}%`,
+          left: `${star.left}%`,
+          width: `${star.size}px`,
+          height: `${star.size}px`,
+          background: star.gold ? '#f4c07a' : '#ffffff',
+          opacity: star.opacity
+        }}
+      />
+    ))}
+  </div>
+)
 
 const MemberPopup = ({ isOpen, onClose }: MemberPopupProps) => {
   const [revealed, setRevealed] = useState(false)
@@ -39,6 +62,11 @@ const MemberPopup = ({ isOpen, onClose }: MemberPopupProps) => {
     }
   }, [])
 
+  const closePopup = useCallback(() => {
+    setRevealed(false)
+    onClose()
+  }, [onClose])
+
   useEffect(() => {
     if (!isOpen) {
       setRevealed(false)
@@ -51,7 +79,7 @@ const MemberPopup = ({ isOpen, onClose }: MemberPopupProps) => {
       return
     }
     const handleKeyDown = (event: KeyboardEvent) => {
-      if (event.key === 'Escape') onClose()
+      if (event.key === 'Escape') closePopup()
     }
     document.body.style.overflow = 'hidden'
     window.addEventListener('keydown', handleKeyDown)
@@ -59,7 +87,7 @@ const MemberPopup = ({ isOpen, onClose }: MemberPopupProps) => {
       document.body.style.overflow = ''
       window.removeEventListener('keydown', handleKeyDown)
     }
-  }, [isOpen, onClose])
+  }, [isOpen, closePopup])
 
   const handleReveal = () => {
     setRevealed(true)
@@ -78,41 +106,22 @@ const MemberPopup = ({ isOpen, onClose }: MemberPopupProps) => {
 
   if (!isOpen) return null
 
-  const StarField = () => (
-    <div className="absolute inset-0 overflow-hidden pointer-events-none">
-      {STARS.map(star => (
-        <div
-          key={star.id}
-          className="absolute rounded-full"
-          style={{
-            top: `${star.top}%`,
-            left: `${star.left}%`,
-            width: `${star.size}px`,
-            height: `${star.size}px`,
-            background: star.gold ? '#f4c07a' : '#ffffff',
-            opacity: star.opacity,
-          }}
-        />
-      ))}
-    </div>
-  )
-
   if (!revealed) {
-    return (
+    return createPortal(
       <div className="fixed inset-0 z-[100] flex items-center justify-center">
         <button
           type="button"
           aria-label="Close"
-          onClick={onClose}
+          onClick={closePopup}
           className="absolute inset-0"
           style={{ background: 'radial-gradient(ellipse at 50% 30%, #0d1b2a 0%, #060d14 100%)' }}
         />
         <StarField />
         <div
-          className="absolute bottom-0 left-0 right-0 h-32 pointer-events-none"
+          className="pointer-events-none absolute right-0 bottom-0 left-0 h-32"
           style={{ background: 'linear-gradient(to top, #0a1520 0%, transparent 100%)' }}
         />
-        <div className="relative z-10 flex flex-col items-center gap-5 px-8 text-center max-w-sm">
+        <div className="relative z-10 flex max-w-sm flex-col items-center gap-5 px-8 text-center">
           <div className="text-4xl select-none">🔥</div>
           <p className="text-xs tracking-[0.5em] uppercase" style={{ color: '#f4c07a88' }}>
             ゆるキャン △
@@ -123,18 +132,18 @@ const MemberPopup = ({ isOpen, onClose }: MemberPopupProps) => {
           >
             A Campfire Awaits
           </h2>
-          <p className="text-white/40 text-xs leading-relaxed max-w-xs">
-            "The night is cold and the stars are out. Come, sit by the fire before we get acquainted."
+          <p className="max-w-xs text-xs leading-relaxed text-white/40">
+            &quot;The night is cold and the stars are out. Come, sit by the fire before we get acquainted.&quot;
           </p>
           <button
             onClick={handleReveal}
             className="mt-3 px-10 py-3 text-sm font-bold tracking-[0.3em] uppercase transition-all duration-300"
             style={{ color: '#f4c07a', border: '1px solid #f4c07a44', background: 'transparent' }}
-            onMouseEnter={e => {
+            onMouseEnter={(e) => {
               e.currentTarget.style.background = '#f4c07a11'
               e.currentTarget.style.borderColor = '#f4c07a99'
             }}
-            onMouseLeave={e => {
+            onMouseLeave={(e) => {
               e.currentTarget.style.background = 'transparent'
               e.currentTarget.style.borderColor = '#f4c07a44'
             }}
@@ -142,50 +151,55 @@ const MemberPopup = ({ isOpen, onClose }: MemberPopupProps) => {
             [ Sit by the Fire ]
           </button>
         </div>
-      </div>
+      </div>,
+      document.body
     )
   }
 
-  return (
-    <div className="fixed inset-0 z-[100] flex items-start justify-center overflow-y-auto px-4 pt-28 pb-8 sm:pt-32">
+  return createPortal(
+    <div className="fixed inset-0 z-[100] flex items-start justify-center overflow-hidden px-4">
       <button
         type="button"
         aria-label="Close member detail"
-        onClick={onClose}
+        onClick={closePopup}
         className="absolute inset-0"
         style={{ background: 'radial-gradient(ellipse at 50% 20%, #0d1b2a 0%, #060d14 100%)' }}
       />
       <StarField />
       <div
-        className="absolute inset-0 pointer-events-none"
+        className="pointer-events-none absolute inset-0"
         style={{ background: 'rgba(6, 13, 20, 0.65)', backdropFilter: 'blur(2px)' }}
       />
       <div
-        className="relative z-10 max-h-[calc(100vh-9rem)] w-full max-w-[720px] animate-[member-popup-show_200ms_ease-out] overflow-y-auto p-6 text-white sm:max-h-[calc(100vh-10rem)] sm:p-8"
+        className="relative z-10 h-[100dvh] max-h-[100dvh] w-full max-w-[720px] animate-[member-popup-show_200ms_ease-out] overflow-y-auto p-6 text-white sm:p-8"
         style={{
           background: 'linear-gradient(160deg, #0d1b2a 0%, #112030 60%, #0d1b2a 100%)',
           border: '1px solid #f4c07a22',
-          boxShadow: '0 0 0 1px #f4c07a0a, inset 0 0 60px #f9731606, 0 20px 60px #00000099',
+          boxShadow: '0 0 0 1px #f4c07a0a, inset 0 0 60px #f9731606, 0 20px 60px #00000099'
         }}
       >
         <div
-          className="absolute top-0 left-1/2 -translate-x-1/2 w-64 h-1 pointer-events-none"
+          className="pointer-events-none absolute top-0 left-1/2 h-1 w-64 -translate-x-1/2"
           style={{
             background: 'linear-gradient(90deg, transparent, #f97316aa, transparent)',
-            filter: 'blur(4px)',
+            filter: 'blur(4px)'
           }}
         />
-        <span className="absolute top-3 left-4 text-xs select-none" style={{ color: '#f4c07a33' }}>✦</span>
-        <span className="absolute top-3 right-12 text-xs select-none" style={{ color: '#f4c07a33' }}>✦</span>
+        <span className="absolute top-3 left-4 text-xs select-none" style={{ color: '#f4c07a33' }}>
+          ✦
+        </span>
+        <span className="absolute top-3 right-12 text-xs select-none" style={{ color: '#f4c07a33' }}>
+          ✦
+        </span>
 
         <button
           type="button"
           aria-label="Close member detail"
-          onClick={onClose}
+          onClick={closePopup}
           className="absolute top-4 right-4 flex h-9 w-9 items-center justify-center text-lg leading-none transition-colors"
           style={{ color: '#f4c07a55', border: '1px solid #f4c07a22' }}
-          onMouseEnter={e => (e.currentTarget.style.color = '#f4c07a')}
-          onMouseLeave={e => (e.currentTarget.style.color = '#f4c07a55')}
+          onMouseEnter={(e) => (e.currentTarget.style.color = '#f4c07a')}
+          onMouseLeave={(e) => (e.currentTarget.style.color = '#f4c07a55')}
         >
           ✕
         </button>
@@ -236,21 +250,21 @@ const MemberPopup = ({ isOpen, onClose }: MemberPopupProps) => {
           style={{ background: 'linear-gradient(90deg, transparent, #f4c07a33, transparent)' }}
         />
 
-        <div className="flex gap-2 mb-5">
+        <div className="mb-5 flex gap-2">
           <Instagram username="arul_haq06" />
           <LinkedInButtonLink username="muhamad-nasrulhaq-354609379" />
         </div>
 
-        <div className="grid gap-4 text-sm font-semibold sm:grid-cols-2 mb-4">
+        <div className="mb-4 grid gap-4 text-sm font-semibold sm:grid-cols-2">
           <div
             className="p-4"
             style={{
               background: '#0a1520',
               border: '1px solid #f4c07a15',
-              boxShadow: 'inset 0 0 15px #00000044',
+              boxShadow: 'inset 0 0 15px #00000044'
             }}
           >
-            <p className="text-xs tracking-[0.3em] uppercase mb-2" style={{ color: '#f4c07a55' }}>
+            <p className="mb-2 text-xs tracking-[0.3em] uppercase" style={{ color: '#f4c07a55' }}>
               ⛺ Hobbies
             </p>
             <p className="text-white/75">Reading novels, playing games, and badminton</p>
@@ -260,10 +274,10 @@ const MemberPopup = ({ isOpen, onClose }: MemberPopupProps) => {
             style={{
               background: '#0a1520',
               border: '1px solid #f4c07a15',
-              boxShadow: 'inset 0 0 15px #00000044',
+              boxShadow: 'inset 0 0 15px #00000044'
             }}
           >
-            <p className="text-xs tracking-[0.3em] uppercase mb-2" style={{ color: '#f4c07a55' }}>
+            <p className="mb-2 text-xs tracking-[0.3em] uppercase" style={{ color: '#f4c07a55' }}>
               🌙 Fun Fact
             </p>
             <p className="text-white/75">I was born on American Independence Day</p>
@@ -275,13 +289,13 @@ const MemberPopup = ({ isOpen, onClose }: MemberPopupProps) => {
           style={{
             background: '#0a1520',
             border: '1px solid #f4c07a15',
-            boxShadow: 'inset 0 0 15px #00000044',
+            boxShadow: 'inset 0 0 15px #00000044'
           }}
         >
-          <p className="text-xs tracking-[0.3em] uppercase mb-2" style={{ color: '#f4c07a55' }}>
+          <p className="mb-2 text-xs tracking-[0.3em] uppercase" style={{ color: '#f4c07a55' }}>
             🎵 Favorite Song
           </p>
-          <p className="text-white/75 text-sm font-semibold mb-3">Fuyubiyori</p>
+          <p className="mb-3 text-sm font-semibold text-white/75">Fuyubiyori</p>
           <SpotifyEmbed spotifyUrl="https://open.spotify.com/track/4Ts3FQkEs1jRIbcgxxT7R0?si=ef181a5eb58d47ac" />
         </div>
 
@@ -289,11 +303,12 @@ const MemberPopup = ({ isOpen, onClose }: MemberPopupProps) => {
           className="mt-5 h-px"
           style={{ background: 'linear-gradient(90deg, transparent, #f4c07a22, transparent)' }}
         />
-        <p className="text-center text-xs mt-3 tracking-widest" style={{ color: '#f4c07a22' }}>
+        <p className="mt-3 text-center text-xs tracking-widest" style={{ color: '#f4c07a22' }}>
           ✦ ゆるキャン △ ✦
         </p>
       </div>
-    </div>
+    </div>,
+    document.body
   )
 }
 

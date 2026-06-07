@@ -124,7 +124,7 @@ const Hero = ({ filters }: HeroProps) => {
   return (
     <section
       id="hero"
-      className="bg-blue-cs-40 text-neutral-cs-10 relative flex w-full items-center justify-center py-36 md:py-16"
+      className="bg-blue-cs-40 text-neutral-cs-10 pointer-events-none relative flex w-full items-center justify-center py-36 md:py-16"
     >
       {/* 1. LAYER VIDEO: Tanpa z-index (Otomatis paling bawah) */}
       <video
@@ -166,7 +166,7 @@ const Hero = ({ filters }: HeroProps) => {
 
         <form
           onSubmit={(event) => event.preventDefault()}
-          className="grid w-full max-w-[920px] grid-cols-1 gap-5 text-left sm:grid-cols-2 lg:grid-cols-[320px_320px_240px]"
+          className="pointer-events-auto grid w-full max-w-[920px] grid-cols-1 gap-5 text-left sm:grid-cols-2 lg:grid-cols-[320px_320px_240px]"
         >
           <label className="flex flex-col gap-2">
             <span className="text-neutral-cs-10/70 text-sm leading-5 font-bold tracking-wide uppercase">Search</span>
