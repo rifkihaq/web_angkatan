@@ -90,40 +90,6 @@ const MemberPopup = ({ isOpen, onClose }: MemberPopupProps) => {
           backgroundAttachment: 'local',
         }}
       >
-      <div className="min-h-full bg-[#FFFDF0]/25 backdrop-blur-[2px] p-6 text-[#3F4E63] sm:p-8">
-        <button
-          type="button"
-          aria-label="Close member detail"
-          onClick={onClose}
-          className="absolute top-4 right-4 flex h-9 w-9 items-center justify-center rounded-full border border-[#A8C0D6] bg-white/70 text-xl leading-none text-[#6F8098] hover:bg-white/90"
-        >
-          x
-        </button>
-
-        <div className="border-neutral-cs-10/40 mb-5 overflow-hidden rounded-2xl border">
-          <Image src={ProfileImage} alt="Profile Image" className="h-120 w-full object-cover object-center" />
-        </div>
-
-        <div className="pr-10">
-          {/* UBAH NAMA ANDA */}
-          <h2 className="text-[#3F4E63] leading-tight">
-            <span className={`${amoresa.className} text-4xl`}>
-              S
-            </span>
-            <span className={`${dellaRespira.className} text-3xl`}>
-              ilfi Rochmatul Auliyah
-            </span>
-          </h2>
-          {/* UBAH NRP DAN ASAL */}
-          <p className={`${dmSans.className} mt-1 text-[13px] font-medium tracking-[0.15em] text-[#8092A8] uppercase`}>
-            5027251008 • Sidoarjo
-          </p>
-        </div>
-
-        <div className="mt-5 flex gap-2">
-          {/* UBAH USERNAME INSTAGRAM */}
-          <div className="rounded-xl border-[3px] border-[#A8C0D6]/85 bg-[#3F4E63]/10 backdrop-blur-md p-3">
-            <Instagram username="seelfwee" />
         <div className="min-h-full bg-[#FFFDF0]/25 backdrop-blur-[2px] p-6 text-[#3F4E63] sm:p-8">
           <button
             type="button"
@@ -180,15 +146,10 @@ const MemberPopup = ({ isOpen, onClose }: MemberPopupProps) => {
             </div>
           </div>
 
-        <div className="mt-4 rounded-xl border-[3px] border-[#A8C0D6]/85 bg-white/25 backdrop-blur-md p-4">
-          {/* UBAH LAGU FAVORIT KAMU */}
-          <p className={`${cormorantGaramond.className} text-xl font-bold tracking-wide text-[#6F8098]`}>Favorite Song</p>
-          <p className={`${nunito.className} mt-2 text-base font-semibold text-[#49596D]`}>Neon moon</p>
-          <span className="absolute -top-4 -left-3 text-3xl text-[#6F8098]">✦</span>
           <div className="mt-4 rounded-xl border-[3px] border-[#A8C0D6]/85 bg-white/25 backdrop-blur-md p-4">
             {/* UBAH LAGU FAVORIT KAMU */}
             <p className={`${cormorantGaramond.className} text-xl font-bold tracking-wide text-[#6F8098]`}>Favorite Song</p>
-            <p className={`${nunito.className} mt-2 text-base font-semibold text-[#49596D]`}>Nothing's Gonna Hurt You Baby</p>
+            <p className={`${nunito.className} mt-2 text-base font-semibold text-[#49596D]`}>Neon moon</p>
             <span className="absolute -top-4 -left-3 text-3xl text-[#6F8098]">✦</span>
 
             {/* UBAH URL SPOTIFY KAMU DENGAN LAGU FAVORIT MU */}
