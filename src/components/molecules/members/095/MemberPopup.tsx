@@ -51,7 +51,7 @@ const MemberPopup = ({ isOpen, onClose }: MemberPopupProps) => {
         className="absolute inset-0 bg-black/60 backdrop-blur-sm"
       />
 
-      <div className="relative z-10 max-h-[calc(100vh-9rem)] w-full max-w-[720px] animate-[member-popup-show_200ms_ease_out] overflow-y-auto rounded-3xl border-2 border-cyan-300 bg-gradient-to-br from-blue-900 to-cyan-700 p-6 text-white shadow-2xl sm:max-h-[calc(100vh-10rem)] sm:p-8">
+      <div className="relative z-10 max-h-[100dvh] w-full max-w-[720px] animate-[member-popup-show_200ms_ease_out] overflow-y-auto rounded-3xl border-2 border-cyan-300 bg-gradient-to-br from-blue-900 to-cyan-700 p-6 text-white shadow-2xl sm:p-8">
         <button
           type="button"
           aria-label="Close member detail"
