@@ -1,9 +1,10 @@
 'use client'
 
+import React, { useEffect, useState } from 'react'
 import React, { useCallback, useEffect, useState } from 'react'
 
 import Image from 'next/image'
-import { Cormorant_Garamond, Nunito } from 'next/font/google'
+import { Cormorant_Garamond, Great_Vibes, Nunito, Silkscreen } from 'next/font/google'
 
 import { createPortal } from 'react-dom'
 
@@ -20,6 +21,16 @@ type MemberPopupProps = {
   isOpen: boolean
   onClose: () => void
 }
+
+const initialFont = Great_Vibes({
+  subsets: ['latin'],
+  weight: '400',
+})
+
+const pixelFont = Silkscreen({
+  subsets: ['latin'],
+  weight: ['400', '700'],
+})
 
 const titleFont = Cormorant_Garamond({
   subsets: ['latin'],
@@ -78,7 +89,10 @@ const MemberPopup = ({ isOpen, onClose }: MemberPopupProps) => {
   return createPortal(
     // PADA BAGIAN INI KAMU BOLEH MENGUBAH STYLE SESUKA HATI KAMU, TAPI JANGAN UBAH STRUKTUR DAN FUNGSI DARI KODE INI AGAR FUNGSI POPUP TETAP BERJALAN DENGAN BAIK
     <div
+      className={`fixed inset-0 z-[100] flex items-center justify-center overflow-hidden px-3 py-3 sm:px-4 sm:py-8 ${bodyFont.className}`}
+
       className={`fixed inset-0 z-[100] flex items-start justify-center overflow-y-auto px-4 ${bodyFont.className}`}
+
     >
       <style jsx global>{`
         @keyframes intro-gif-zoom {
@@ -267,7 +281,7 @@ const MemberPopup = ({ isOpen, onClose }: MemberPopupProps) => {
         </div>
       ) : (
         <>
-          {/* ORNAMEN KIRI DESKTOP - DIBUAT MENCAR */}
+          {/* ORNAMEN KIRI DESKTOP - MENCAR */}
           <div className="pointer-events-none absolute inset-y-0 left-0 z-[35] hidden w-[260px] lg:block">
             <div className="absolute left-8 top-[8%] text-3xl text-[#ffefb3] drop-shadow-[0_0_18px_rgba(255,239,179,0.95)] animate-[side-float-soft_3600ms_ease-in-out_infinite]">
               ✧
@@ -298,7 +312,7 @@ const MemberPopup = ({ isOpen, onClose }: MemberPopupProps) => {
             </div>
           </div>
 
-          {/* ORNAMEN KANAN DESKTOP - DIBUAT MENCAR */}
+          {/* ORNAMEN KANAN DESKTOP - MENCAR */}
           <div className="pointer-events-none absolute inset-y-0 right-0 z-[35] hidden w-[260px] lg:block">
             <div className="absolute right-12 top-[7%] text-5xl text-[#ffefb3] drop-shadow-[0_0_22px_rgba(255,239,179,0.95)] animate-[glow-twinkle_2600ms_ease-in-out_infinite]">
               ☆
@@ -306,7 +320,7 @@ const MemberPopup = ({ isOpen, onClose }: MemberPopupProps) => {
             <div className="absolute right-36 top-[16%] text-3xl text-[#ffefb3] drop-shadow-[0_0_18px_rgba(255,239,179,0.95)] animate-[side-float-soft_3500ms_ease-in-out_infinite]">
               ✦
             </div>
-            <div className="absolute right-18 top-[27%] text-5xl text-[#ffefb3] drop-shadow-[0_0_22px_rgba(255,239,179,0.95)] animate-[ribbon-sway_3400ms_ease-in-out_infinite]">
+            <div className="absolute right-[4.5rem] top-[27%] text-5xl text-[#ffefb3] drop-shadow-[0_0_22px_rgba(255,239,179,0.95)] animate-[ribbon-sway_3400ms_ease-in-out_infinite]">
               ୨ৎ
             </div>
             <div className="absolute right-40 top-[38%] text-4xl text-[#ffefb3] drop-shadow-[0_0_20px_rgba(255,239,179,0.95)] animate-[glow-twinkle_2900ms_ease-in-out_infinite]">
@@ -315,7 +329,7 @@ const MemberPopup = ({ isOpen, onClose }: MemberPopupProps) => {
             <div className="absolute right-8 top-[50%] text-3xl text-[#ffefb3] drop-shadow-[0_0_18px_rgba(255,239,179,0.95)] animate-[side-float-soft_4000ms_ease-in-out_infinite]">
               ✧
             </div>
-            <div className="absolute right-34 top-[60%] text-4xl text-[#ffefb3] drop-shadow-[0_0_20px_rgba(255,239,179,0.95)] animate-[glow-twinkle_2700ms_ease-in-out_infinite]">
+            <div className="absolute right-[8.5rem] top-[60%] text-4xl text-[#ffefb3] drop-shadow-[0_0_20px_rgba(255,239,179,0.95)] animate-[glow-twinkle_2700ms_ease-in-out_infinite]">
               🐾
             </div>
             <div className="absolute right-14 top-[70%] text-4xl text-[#ffefb3] drop-shadow-[0_0_20px_rgba(255,239,179,0.95)] animate-[side-float-soft_3800ms_ease-in-out_infinite]">
@@ -341,7 +355,6 @@ const MemberPopup = ({ isOpen, onClose }: MemberPopupProps) => {
           >
             <div className="pointer-events-none absolute inset-0 z-0 rounded-[24px] bg-[radial-gradient(circle_at_18%_14%,rgba(255,239,179,0.18),transparent_25%),radial-gradient(circle_at_85%_35%,rgba(255,239,179,0.14),transparent_30%),radial-gradient(circle_at_50%_100%,rgba(255,239,179,0.1),transparent_38%)] sm:rounded-[30px]" />
 
-            {/* Ornamen di dalam modal */}
             <div className="pointer-events-none absolute left-4 top-6 z-[70] text-[#ffefb3] sm:left-5 sm:top-7">
               <div className="text-2xl drop-shadow-[0_0_14px_rgba(255,239,179,0.95)] sm:text-3xl">✧</div>
               <div className="mt-2 text-3xl drop-shadow-[0_0_16px_rgba(255,239,179,0.95)] sm:text-4xl">☆</div>
@@ -396,25 +409,56 @@ const MemberPopup = ({ isOpen, onClose }: MemberPopupProps) => {
                 </div>
 
                 {/* UBAH NAMA ANDA */}
-                <h2
-                  className={`${titleFont.className} whitespace-nowrap text-[clamp(1.55rem,7vw,3.25rem)] font-bold leading-none tracking-wide text-[#fff5d0] drop-shadow-[0_0_14px_rgba(255,239,179,0.98)]`}
-                >
-                  <span className="text-[clamp(2.1rem,9vw,4.55rem)] italic leading-none drop-shadow-[0_0_16px_rgba(255,239,179,0.98)]">
-                    S
+                <h2 className="flex flex-wrap items-end gap-x-2 gap-y-1 leading-none text-[#fff5d0]">
+                  <span className="flex items-end">
+                    <span
+                      className={`${initialFont.className} text-[clamp(3.1rem,10vw,6.2rem)] leading-[0.78] text-[#fff5d0] drop-shadow-[0_0_18px_rgba(255,239,179,1)]`}
+                    >
+                      S
+                    </span>
+
+                    <span
+                      className={`${pixelFont.className} ml-[-0.28rem] inline-block text-[clamp(1.05rem,3.5vw,2.05rem)] tracking-[-0.04em] text-[#fff5d0] drop-shadow-[0_0_14px_rgba(255,239,179,0.95)] sm:ml-[-0.42rem]`}
+                    >
+                      A
+                      <span className="relative inline-block text-[#fff0b3] drop-shadow-[0_0_18px_rgba(255,239,179,1)]">
+                        HIRA
+                        <span className="absolute -bottom-1 left-0 h-[2px] w-full rounded-full bg-[#ffefb3] shadow-[0_0_12px_rgba(255,239,179,0.95)]" />
+                      </span>
+                    </span>
                   </span>
-                  ahira{' '}
-                  <span className="text-[clamp(2.1rem,9vw,4.55rem)] italic leading-none drop-shadow-[0_0_16px_rgba(255,239,179,0.98)]">
-                    B
+
+                  <span className="flex items-end">
+                    <span
+                      className={`${initialFont.className} text-[clamp(3.1rem,10vw,6.2rem)] leading-[0.78] text-[#fff5d0] drop-shadow-[0_0_18px_rgba(255,239,179,1)]`}
+                    >
+                      B
+                    </span>
+
+                    <span
+                      className={`${pixelFont.className} ml-[-0.22rem] inline-block text-[clamp(1.05rem,3.5vw,2.05rem)] tracking-[-0.04em] text-[#fff5d0] drop-shadow-[0_0_14px_rgba(255,239,179,0.95)] sm:ml-[-0.36rem]`}
+                    >
+                      ILQIS
+                    </span>
                   </span>
-                  ilqis{' '}
-                  <span className="text-[clamp(2.1rem,9vw,4.55rem)] italic leading-none drop-shadow-[0_0_16px_rgba(255,239,179,0.98)]">
-                    R
+
+                  <span className="flex items-end">
+                    <span
+                      className={`${initialFont.className} text-[clamp(3.1rem,10vw,6.2rem)] leading-[0.78] text-[#fff5d0] drop-shadow-[0_0_18px_rgba(255,239,179,1)]`}
+                    >
+                      R
+                    </span>
+
+                    <span
+                      className={`${pixelFont.className} ml-[-0.22rem] inline-block text-[clamp(1.05rem,3.5vw,2.05rem)] tracking-[-0.04em] text-[#fff5d0] drop-shadow-[0_0_14px_rgba(255,239,179,0.95)] sm:ml-[-0.36rem]`}
+                    >
+                      IVADITO
+                    </span>
                   </span>
-                  ivadito
                 </h2>
 
                 {/* UBAH NRP DAN ASAL */}
-                <p className="mt-1 text-sm font-extrabold text-[#f8fafc]/92 sm:text-lg">5027251037 - Bekasi</p>
+                <p className="mt-3 text-sm font-extrabold text-[#f8fafc]/92 sm:text-lg">5027251037 - Bekasi</p>
               </div>
 
               <div className="mt-4 grid gap-3 sm:mt-5 sm:grid-cols-2">
@@ -448,7 +492,7 @@ const MemberPopup = ({ isOpen, onClose }: MemberPopupProps) => {
                   </div>
 
                   {/* UBAH HOBI KAMU */}
-                  <p className="absolute left-4 top-4 text-xs font-extrabold tracking-[0.3em] uppercase text-[#ffefb3]/85 sm:left-5 sm:top-5">
+                  <p className="absolute left-4 top-4 text-xs font-extrabold tracking-[0.3em] uppercase text-[#ffefb3]/90 drop-shadow-[0_0_8px_rgba(255,239,179,0.65)] sm:left-5 sm:top-5">
                     Hobi
                   </p>
 
@@ -470,7 +514,9 @@ const MemberPopup = ({ isOpen, onClose }: MemberPopupProps) => {
                   </div>
 
                   {/* UBAH FUNFACT KAMU */}
-                  <p className="text-xs font-extrabold tracking-[0.3em] uppercase text-[#ffefb3]/85">Fun Fact</p>
+                  <p className="text-xs font-extrabold tracking-[0.3em] uppercase text-[#ffefb3]/90 drop-shadow-[0_0_8px_rgba(255,239,179,0.65)]">
+                    Fun Fact
+                  </p>
                   <p className="mt-3 text-base font-extrabold leading-relaxed text-[#f8fafc] sm:text-lg">
                     hidup seputar kucing, biru, nonton, tidur /ᐠ - ˕ -マ
                   </p>
@@ -487,11 +533,19 @@ const MemberPopup = ({ isOpen, onClose }: MemberPopupProps) => {
                 </div>
 
                 {/* UBAH LAGU FAVORIT KAMU */}
-                <p className="text-xs font-extrabold tracking-[0.3em] uppercase text-[#ffefb3]/85">Lagu Favorit</p>
+                <p className="text-xs font-extrabold tracking-[0.3em] uppercase text-[#ffefb3]/90 drop-shadow-[0_0_8px_rgba(255,239,179,0.65)]">
+                  Lagu Favorit
+                </p>
                 <p
-                  className={`${titleFont.className} my-2 text-[1.9rem] font-bold leading-tight tracking-wide text-[#fff5d0] drop-shadow-[0_0_14px_rgba(255,239,179,0.98)] sm:text-4xl sm:leading-none`}
+                  className={`${titleFont.className} my-2 text-[clamp(1.75rem,5.8vw,3rem)] font-bold leading-tight tracking-wide text-[#fff5d0] drop-shadow-[0_0_16px_rgba(255,239,179,1)] sm:leading-none`}
                 >
-                  hidup mati kokwet laufey ౨ৎ
+                  apapun yg berunsur{' '}
+                  <span className="inline-block text-[#fff0b3] drop-shadow-[0_0_18px_rgba(255,239,179,1)]">
+                    Laufey/Reality Club
+                  </span>{' '}
+                  <span className="inline-block text-[#ffefb3] drop-shadow-[0_0_16px_rgba(255,239,179,1)]">
+                    ౨ৎ
+                  </span>
                 </p>
 
                 <div className="rounded-[18px] border border-[#ffefb3]/18 bg-[#061a33]/72 p-2 shadow-[inset_0_0_24px_rgba(255,239,179,0.06)] sm:rounded-[20px] sm:p-3">
