@@ -156,7 +156,8 @@ const MemberPopup = ({ isOpen, onClose }: MemberPopupProps) => {
           <SpotifyEmbed spotifyUrl="https://open.spotify.com/track/6VrLYoQKdhu1Jruei06t65?si=GL-ZeGyHRhy9c8EmX27yHA" />
         </div>
       </div>
-    </div>
+    </div>,
+    document.body
   )
 }
 
