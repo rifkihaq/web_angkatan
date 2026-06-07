@@ -1,6 +1,7 @@
 'use client'
 
 import React, { useEffect, useRef, useState } from 'react'
+import { createPortal } from 'react-dom'
 
 import Image from 'next/image'
 
@@ -74,8 +75,8 @@ const MemberPopup = ({ isOpen, onClose }: MemberPopupProps) => {
     return null
   }
 
-  return (
-    <div className="fixed inset-0 z-[100] flex items-start justify-center overflow-y-auto px-4 pt-28 pb-8 sm:pt-32">
+  return createPortal(
+    <div className="fixed inset-0 z-[100] flex items-start justify-center overflow-y-auto px-4">
       {/* ===== AUDIO AUTOPLAY (Pastikan file mp3 ada di folder public) ===== */}
       <audio ref={audioRef} loop src="/sign-of-the-times.mp3" />
 
@@ -277,7 +278,7 @@ const MemberPopup = ({ isOpen, onClose }: MemberPopupProps) => {
 
       {/* ===== MAIN CARD - GLASSMORPHISM CONTAINER (STRUKTUR JANGAN DIUBAH) ===== */}
       <div
-        className="border-neutral-cs-10 bg-blue-cs-40 relative z-10 max-h-[calc(100vh-9rem)] w-full max-w-[720px] animate-[member-popup-show_200ms_ease-out] overflow-y-auto rounded-2xl border-2 p-6 text-white shadow-xl sm:max-h-[calc(100vh-10rem)] sm:p-8"
+        className="border-neutral-cs-10 bg-blue-cs-40 relative z-10 max-h-[100dvh] w-full max-w-[720px] animate-[member-popup-show_200ms_ease-out] overflow-y-auto rounded-2xl border-2 p-6 text-white shadow-xl sm:p-8"
         style={{
           /* EFEK GLASSMORPHISM DENGAN GRADASI 3 WARNA */
           background:
